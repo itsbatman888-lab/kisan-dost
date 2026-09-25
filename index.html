@@ -156,15 +156,18 @@
 
                 <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="p-6 space-y-5">
                     <!-- Name input -->
-                <span id="labelName">Name</span>
+                    ```html
+<div>
+    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
+        <span id="labelName">Name</span>
         <span class="text-red-500 text-[10px] font-normal">* Required</span>
     </label>
 
     <div class="relative">
-        <input
-            type="text"
-            id="nameInput"
-            maxlength="50"
+        <input 
+            type="text" 
+            id="nameInput" 
+            maxlength="50" 
             placeholder="e.g. Rahul Kumar"
             class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium focus:bg-white transition"
             oninput="validateNameInput(this)"
@@ -175,7 +178,8 @@
         <i class="fa-solid fa-circle-exclamation"></i>
         <span>Please enter a valid name</span>
     </p>
-     </div>
+</div>
+```
             <!-- Mobile Number Input -->
             <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
