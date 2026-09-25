@@ -4,7 +4,7 @@ const CACHE_NAME = 'kisan-dost-v2';
 const FILES_TO_SAVE = [
   './index.html',
   './manifest.json',
-  '/Kisan dosti.png'
+  './Kisan dosti.png'
   'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
 ];
