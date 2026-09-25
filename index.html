@@ -3,12 +3,18 @@
     <!-- Supabase Magic Helper Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <head>
-    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
-    <!-- Tell phone about the App ID Card -->
-<link rel="manifest" href="manifest.json">
+<!-- PWA Manifest & App ID Card -->
+<link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#16a34a">
+
+<!-- Direct Logo Links (Fixes the paper placeholder icon) -->
+<link rel="icon" type="image/png" href="./logo.png">
+<link rel="apple-touch-icon" href="./logo.png">
+
+<!-- Mobile & iOS Fullscreen Settings -->
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <!-- Start the Offline Helper -->
 <script>
