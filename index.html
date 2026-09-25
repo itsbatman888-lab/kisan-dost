@@ -3,363 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kisan Dost | Emergency Equipment & Service Booking for Farmers</title>
+    <title>Kisan Dost - Emergency Agricultural Equipment & Services</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter & Noto Sans for Indian Languages -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        emeraldDeep: '#1B4332',
-                        leafGreen: '#2D6A4F',
-                        limeAccent: '#52B788',
-                        mintLight: '#D8F3DC',
-                        warmGold: '#E9C46A',
-                        earthOrange: '#E76F51',
-                        softCream: '#F8F9FA',
-                        darkSlate: '#1A202C'
+                        kisan: {
+                            darker: '#0b251a',
+                            dark: '#1b4332',
+                            medium: '#2d6a4f',
+                            accent: '#52b788',
+                            light: '#74c69d',
+                            pale: '#d8f3dc',
+                            gold: '#d4af37',
+                            goldhover: '#b59226',
+                            emergency: '#dc2626'
+                        }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'Noto Sans Devanagari', 'Noto Sans Telugu', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-subtle': 'bounce 1.5s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
                     }
                 }
             }
         }
     </script>
-    
     <style>
         body {
-            font-family: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Telugu', sans-serif;
-            background-color: #f3f7f4;
-            color: #1a202c;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f9f5;
         }
-
-        /* Pulse glowing animation for logo */
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(82, 183, 136, 0.8)); }
-            50% { transform: scale(1.06); filter: drop-shadow(0 0 30px rgba(233, 196, 106, 0.9)); }
-        }
-
-        .animate-logo-glow {
-            animation: pulseGlow 3s infinite ease-in-out;
-        }
-
-        /* Glassmorphism styling */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .glass-dark {
+        .glass-nav {
             background: rgba(27, 67, 50, 0.92);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(82, 183, 136, 0.2);
         }
-
-        /* Custom scrollbar styling */
-        ::-webkit-scrollbar {
+        .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
-        ::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 4px;
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #e8f5e9;
+            border-radius: 8px;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #2D6A4F;
-            border-radius: 4px;
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #52b788;
+            border-radius: 8px;
         }
-
-        /* Shimmer effect for emergency banner */
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        .pulse-emergency {
+            box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+            animation: pulse-red 1.8s infinite;
         }
-        .shimmer-bg {
-            background: linear-gradient(90deg, #1B4332 25%, #2D6A4F 50%, #1B4332 75%);
-            background-size: 200% 100%;
-            animation: shimmer 4s infinite;
-        }
-
-        /* Ripple effect on touch */
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-        .ripple:after {
-            content: "";
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
-            background-repeat: no-repeat;
-            background-position: 50%;
-            transform: scale(10, 10);
-            opacity: 0;
-            transition: transform .5s, opacity 1s;
-        }
-        .ripple:active:after {
-            transform: scale(0, 0);
-            opacity: .3;
-            transition: 0s;
+        @keyframes pulse-red {
+            0% { transform: scale(0.99); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { transform: scale(1.01); box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
+            100% { transform: scale(0.99); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-limeAccent selection:text-emeraldDeep">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-kisan-accent selection:text-white">
 
-    <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-emeraldDeep via-leafGreen to-emeraldDeep text-white transition-opacity duration-700">
-        <canvas id="particleCanvas" class="absolute inset-0 w-full h-full opacity-40"></canvas>
-        
-        <div class="relative z-10 text-center px-6 flex flex-col items-center">
-            <!-- Logo Icon -->
-            <div class="w-28 h-28 mb-6 rounded-full bg-white/10 backdrop-blur-md border-2 border-limeAccent/50 flex items-center justify-center shadow-2xl animate-logo-glow">
-                <i class="fa-solid fa-tractor text-5xl text-warmGold"></i>
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-kisan-darker via-kisan-dark to-kisan-medium flex flex-col items-center justify-center text-white transition-opacity duration-700">
+        <div class="text-center p-6 max-w-md mx-auto animate-fade-in">
+            <div class="w-28 h-28 mx-auto mb-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border-2 border-kisan-accent shadow-2xl relative">
+                <i class="fa-solid fa-tractor text-5xl text-kisan-pale animate-bounce-subtle"></i>
+                <span class="absolute -top-1 -right-1 flex h-6 w-6">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kisan-gold opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-6 w-6 bg-kisan-gold items-center justify-center text-[10px] text-kisan-darker font-bold">🌾</span>
+                </span>
             </div>
-            
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-2 text-white drop-shadow-md" id="splashTitle">
-                Kisan Dost
-            </h1>
-            <p class="text-limeAccent text-lg md:text-xl font-medium max-w-md mb-8" id="splashTagline">
-                Fast & Reliable Farm Equipment Booking
-            </p>
-
-            <div class="flex items-center space-x-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-                <div class="w-3 h-3 bg-limeAccent rounded-full animate-ping"></div>
-                <span class="text-xs font-semibold tracking-wider text-gray-200 uppercase">Emergency Agricultural Network</span>
+            <h1 class="text-4xl font-extrabold tracking-tight mb-2 text-white">किसान दोस्त <span class="text-kisan-accent">/</span> Kisan Dost</h1>
+            <p class="text-sm font-medium text-kisan-pale mb-6 uppercase tracking-widest">Empowering Farmers, Accelerating Harvests</p>
+            <div class="flex items-center justify-center gap-2 text-xs text-emerald-200">
+                <i class="fa-solid fa-bolt text-yellow-400"></i>
+                <span>Telangana's 1st 30-Min Emergency Farm Logistics</span>
             </div>
-
-            <button onclick="skipSplash()" class="mt-10 px-8 py-3 bg-warmGold hover:bg-yellow-400 text-emeraldDeep font-bold rounded-full shadow-lg transition transform hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-wide">
-                Get Started <i class="fa-solid fa-arrow-right ml-2"></i>
-            </button>
-        </div>
-
-        <div class="absolute bottom-6 text-xs text-white/60">
-            Powered by Kisan Dost Smart Agriculture Logistics v2.4
+            <div class="mt-8">
+                <div class="w-12 h-12 border-4 border-kisan-accent border-t-transparent rounded-full animate-spin mx-auto"></div>
+            </div>
         </div>
     </div>
 
-    <header class="sticky top-0 z-30 bg-emeraldDeep text-white shadow-md border-b border-limeAccent/20">
+    <header id="mainHeader" class="glass-nav sticky top-0 z-40 text-white shadow-lg border-b border-white/10 hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <!-- Brand Logo -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
-                <div class="w-10 h-10 rounded-xl bg-limeAccent/20 border border-limeAccent/40 flex items-center justify-center text-warmGold text-xl shadow-inner">
-                    <i class="fa-solid fa-tractor"></i>
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetToHome()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-kisan-accent to-emerald-400 flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-tractor text-xl text-kisan-darker"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-extrabold text-white tracking-wide block leading-none">
-                        Kisan Dost <span class="text-warmGold text-xs font-semibold"> किसान दोस्त</span>
-                    </span>
-                    <span class="text-[10px] text-limeAccent font-medium block mt-0.5" id="headerSubtitle">
-                        Equipment & Emergency Services
-                    </span>
+                    <span class="text-xl font-bold tracking-tight block leading-tight text-white" id="navTitle">Kisan Dost</span>
+                    <span class="text-[10px] text-emerald-200 font-medium tracking-wider uppercase block" id="navSubtitle">Emergency Agri Network</span>
                 </div>
             </div>
 
-            <!-- Header Actions -->
+            <!-- Controls (Language Switcher + Settings Icon) -->
             <div class="flex items-center space-x-3">
-                <!-- User Location Badge (Visible after login) -->
-                <div id="userLocationBadge" class="hidden sm:flex items-center space-x-2 bg-leafGreen/60 border border-limeAccent/30 px-3 py-1.5 rounded-lg text-xs font-medium text-white">
-                    <i class="fa-solid fa-location-dot text-warmGold animate-bounce"></i>
-                    <span id="userLocationText">Geesugonda, Warangal</span>
-                </div>
-
-                <!-- Language Selector Dropdown -->
-                <div class="relative">
-                    <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-leafGreen/80 text-white font-semibold text-xs border border-limeAccent/40 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-warmGold cursor-pointer transition">
-                        <option value="en">English (EN)</option>
-                        <option value="hi">हिंदी (HI)</option>
-                        <option value="te">తెలుగు (TE)</option>
+                <!-- Dynamic Language Switcher -->
+                <div class="relative inline-block text-left">
+                    <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold py-2 px-3 pr-7 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-kisan-accent appearance-none cursor-pointer transition">
+                        <option value="en" class="text-slate-800">English (EN)</option>
+                        <option value="hi" class="text-slate-800">हिन्दी (HI)</option>
+                        <option value="te" class="text-slate-800">తెలుగు (TE)</option>
                     </select>
+                    <i class="fa-solid fa-globe absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-emerald-200 pointer-events-none"></i>
                 </div>
 
-                <!-- Active Bookings Button -->
-                <button id="bookingsNavBtn" onclick="openActiveBookingsModal()" class="hidden relative p-2 text-white hover:text-warmGold transition rounded-lg hover:bg-leafGreen">
-                    <i class="fa-solid fa-clock-history text-lg"></i>
-                    <span id="bookingBadgeCount" class="absolute -top-1 -right-1 bg-warmGold text-emeraldDeep font-extrabold text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow">
-                        0
-                    </span>
+                <!-- User Profile & Settings Drawer Trigger Button -->
+                <button id="settingsBtn" onclick="toggleSettingsDrawer()" class="relative p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition group flex items-center gap-2">
+                    <i class="fa-solid fa-gear text-lg text-emerald-200 group-hover:rotate-45 transition-transform duration-300"></i>
+                    <span class="hidden sm:inline text-xs font-semibold text-white" id="navUserBadge">Farmer</span>
+                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-kisan-dark rounded-full"></span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN APP CONTAINER -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <section id="loginSection" class="max-w-md mx-auto my-6 bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform transition duration-300">
-            <div class="bg-gradient-to-r from-emeraldDeep to-leafGreen p-6 text-white text-center relative overflow-hidden">
-                <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-limeAccent/10 rounded-full blur-xl"></div>
-                <div class="w-16 h-16 mx-auto mb-3 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-warmGold text-3xl border border-white/20 shadow-md">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
+        <!-- LOGIN / REGISTRATION SCREEN -->
+        <section id="loginSection" class="max-w-md mx-auto my-6 animate-fade-in hidden">
+            <div class="bg-white rounded-3xl shadow-xl border border-kisan-pale overflow-hidden">
+                <div class="bg-gradient-to-r from-kisan-dark to-kisan-medium p-6 text-white text-center relative">
+                    <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-white/20">
+                        <i class="fa-solid fa-id-card text-3xl text-kisan-pale"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold" id="loginHeaderTitle">Farmer Registration & Login</h2>
+                    <p class="text-xs text-emerald-200 mt-1" id="loginHeaderSub">Access instant machinery & verified operators in Telangana</p>
                 </div>
-                <h2 class="text-2xl font-bold" id="loginTitle">Farmer Login</h2>
-                <p class="text-xs text-limeAccent/90 mt-1" id="loginSubtitle">Enter your details for instant equipment access</p>
+
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="p-6 space-y-5">
+                    <!-- Name input -->
+                            <span id="labelName">Name</span>
+        <span class="text-red-500 text-[10px] font-normal">* Required</span>
+    </label>
+
+    <div class="relative">
+        <input
+            type="text"
+            id="nameInput"
+            maxlength="50"
+            placeholder="e.g. Rahul Kumar"
+            class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium focus:bg-white transition"
+            oninput="validateNameInput(this)"
+        >
+    </div>
+
+    <p id="nameError" class="text-xs text-red-600 mt-1.5 hidden flex items-center gap-1 font-medium">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>Please enter a valid name</span>
+    </p>
+</div>
+                    <!-- Mobile Number Input -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
+                            <span id="labelMobile">Mobile Number</span>
+                            <span class="text-red-500 text-[10px] font-normal">* 10 Digits strictly required</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 font-semibold text-sm">+91</span>
+                            <input type="text" id="mobileInput" maxlength="10" placeholder="e.g. 9876543210" 
+                                class="w-full pl-14 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium focus:bg-white transition"
+                                oninput="validateMobileInput(this)">
+                        </div>
+                        <p id="mobileError" class="text-xs text-red-600 mt-1.5 hidden flex items-center gap-1 font-medium">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span>Please enter a valid 10-digit mobile number (numbers only)</span>
+                        </p>    
+                    </div>
+
+                    <!-- Telangana District Dropdown -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2" id="labelDistrict">
+                            Select District (तेलंगाना जिला)
+                        </label>
+                        <div class="relative">
+                            <select id="districtSelect" onchange="handleDistrictChange()" 
+                                class="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium focus:bg-white appearance-none transition">
+                                <option value="">-- Choose District --</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Mandal Dropdown -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2" id="labelMandal">
+                            Select Mandal (मण्डल)
+                        </label>
+                        <div class="relative">
+                            <select id="mandalSelect" disabled 
+                                class="w-full pl-4 pr-10 py-3 bg-slate-100 border border-slate-300 rounded-xl text-slate-500 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium focus:bg-white appearance-none transition cursor-not-allowed">
+                                <option value="">-- First Select District --</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btnSubmitLogin" 
+                        class="w-full py-3.5 bg-gradient-to-r from-kisan-medium to-kisan-dark text-white font-bold rounded-xl shadow-lg hover:from-kisan-dark hover:to-kisan-darker transition duration-200 flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Enter Kisan Dost Dashboard</span>
+                    </button>
+                </form>
             </div>
-
-            <form id="loginForm" onsubmit="handleLogin(event)" class="p-6 space-y-4">
-                <!-- Mobile Number -->
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5" id="lblMobile">Mobile Number</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 font-bold text-sm">+91</span>
-                        <input type="tel" id="mobileInput" maxlength="10" required placeholder="9876543210" class="w-full pl-12 pr-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-leafGreen focus:border-transparent font-semibold tracking-wider">
-                    </div>
-                </div>
-
-                <!-- District Selection -->
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5" id="lblDistrict">District (जिला / జిల్లా)</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                        </span>
-                        <select id="districtInput" required class="w-full pl-10 pr-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-leafGreen focus:border-transparent font-medium">
-                            <option value="" disabled selected>Select District</option>
-                            <option value="Warangal">Warangal / वरांगल</option>
-                            <option value="Karimnagar">Karimnagar / करीमनगर</option>
-                            <option value="Nalgonda">Nalgonda / नलगोंडा</option>
-                            <option value="Khammam">Khammam / खम्मम</option>
-                            <option value="Guntur">Guntur / गुंटूर</option>
-                            <option value="Ludhiana">Ludhiana / लुधियाना</option>
-                            <option value="Karnal">Karnal / करनाल</option>
-                            <option value="Nashik">Nashik / नासिक</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Mandal / Block Input -->
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5" id="lblMandal">Mandal / Tehsil (मंडल / మండలం)</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-                            <i class="fa-solid fa-tree"></i>
-                        </span>
-                        <input type="text" id="mandalInput" required placeholder="e.g. Geesugonda or Sangam" class="w-full pl-10 pr-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-leafGreen focus:border-transparent font-medium">
-                    </div>
-                </div>
-
-                <!-- Demo Notice -->
-                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start space-x-2 text-xs text-amber-800">
-                    <i class="fa-solid fa-circle-info text-amber-600 text-sm mt-0.5"></i>
-                    <span id="demoNoticeText">Demo mode active: Instant setup without OTP delay for quick farmer testing.</span>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="w-full py-3.5 bg-leafGreen hover:bg-emeraldDeep text-white font-bold rounded-xl shadow-lg transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2 text-base">
-                    <span id="btnLogin">Register & Continue</span>
-                    <i class="fa-solid fa-circle-check"></i>
-                </button>
-            </form>
         </section>
 
-        <div id="mainDashboard" class="hidden space-y-6">
+        <div id="dashboardSection" class="space-y-6 hidden">
 
-            <!-- Emergency Express Hotline Banner -->
-            <div class="shimmer-bg rounded-2xl p-4 sm:p-6 text-white shadow-lg relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-limeAccent/30">
-                <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                    <div class="w-14 h-14 bg-red-500/20 rounded-2xl border-2 border-red-400 flex items-center justify-center text-red-400 text-2xl animate-pulse shrink-0">
-                        <i class="fa-solid fa-bolt-lightning text-yellow-300"></i>
+            <!-- TOP EMERGENCY BOOKING BAR -->
+            <div id="emergencyBar" class="pulse-emergency bg-gradient-to-r from-red-600 via-rose-700 to-red-800 text-white p-4 sm:p-5 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 border border-red-500">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 animate-pulse">
+                        <i class="fa-solid fa-bolt text-yellow-300 text-2xl"></i>
                     </div>
                     <div>
-                        <span class="bg-red-500/30 text-red-200 border border-red-400/40 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full inline-block mb-1" id="bannerBadge">
-                            🚨 HARVEST EMERGENCY EXPRESS
+                        <div class="flex items-center gap-2">
+                            <span class="bg-yellow-400 text-red-950 font-black text-[10px] px-2 py-0.5 rounded uppercase tracking-wider" id="badgeCritical">CRITICAL EMERGENCY</span>
+                            <span class="text-xs text-red-100 font-medium">⚡ 30-Min Rapid Dispatch</span>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-extrabold mt-0.5 text-white" id="emergencyBannerTitle">
+                            Urgent Harvester & Emergency Repair Assistance
+                        </h3>
+                        <p class="text-xs text-red-100" id="emergencyBannerSub">Priority matching for rain threats, sudden breakdown & crop harvesting deadlines</p>
+                    </div>
+                </div>
+
+                <!-- Emergency Quick Filter Switch -->
+                <div class="flex items-center gap-3 bg-red-950/40 px-4 py-2.5 rounded-xl border border-white/20 w-full md:w-auto justify-between md:justify-end">
+                    <span class="text-xs font-bold text-white uppercase tracking-wide" id="lblEmergencyOnly">30-Min Operators Only</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="emergencyToggle" onchange="toggleEmergencyFilter()" class="sr-only peer">
+                        <div class="w-11 h-6 bg-red-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-400"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- TWO MAIN CATEGORY PORTIONS (Machineries & Services) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Machineries Card Option -->
+                <div onclick="selectMainCategory('machineries')" id="cardMachineries" 
+                    class="group bg-white rounded-2xl p-6 shadow-md border-2 border-emerald-100 hover:border-kisan-medium hover:shadow-xl transition duration-300 cursor-pointer relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-6 -bottom-6 text-emerald-50 text-8xl group-hover:text-emerald-100 transition duration-300 pointer-events-none">
+                        <i class="fa-solid fa-tractor"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-kisan-pale text-kisan-dark font-extrabold text-xs rounded-full uppercase tracking-wider" id="badgeMachineryCount">11 Types Available</span>
+                            <div class="w-12 h-12 rounded-xl bg-kisan-medium text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition duration-300">
+                                <i class="fa-solid fa-tractor"></i>
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-1" id="catMachineriesTitle">Machineries</h2>
+                        <p class="text-xs text-kisan-medium font-semibold mb-2" id="catMachineriesSub">कृषि मशीनरी / వ్యవసాయ యంత్రాలు</p>
+                        <p class="text-xs text-slate-500 leading-relaxed" id="catMachineriesDesc">Combine Harvesters, Transplanters, Drones, Heavy Tractors, Rotavators, Cultivators & Ploughs.</p>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold text-kisan-medium group-hover:underline flex items-center gap-1">
+                            <span id="btnExploreMachinery">Explore Machineries</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </span>
-                        <h3 class="text-lg sm:text-xl font-bold text-white" id="bannerTitle">Critical Crops Emergency Machine Dispatch</h3>
-                        <p class="text-xs sm:text-sm text-limeAccent/90 mt-0.5" id="bannerDesc">Sudden rainfall or unseasonal weather? Get Harvesters & Loaders within 30-45 minutes!</p>
+                        <span class="text-[10px] bg-slate-100 font-bold px-2 py-1 rounded text-slate-600">Verified Equipment</span>
                     </div>
                 </div>
-                <button onclick="quickEmergencyHarvestBooking()" class="w-full md:w-auto px-5 py-2.5 bg-warmGold hover:bg-yellow-400 text-emeraldDeep font-extrabold rounded-xl shadow-md transition transform hover:scale-105 active:scale-95 text-xs sm:text-sm whitespace-nowrap flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-truck-fast"></i>
-                    <span id="bannerBtn">Book Emergency Machine</span>
-                </button>
-            </div>
 
-            <!-- Tab Navigation Bar -->
-            <div class="bg-white p-1.5 rounded-2xl shadow-md border border-gray-100 flex space-x-2">
-                <button id="tabMachineriesBtn" onclick="switchCategoryTab('machineries')" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition shadow-sm bg-leafGreen text-white">
-                    <i class="fa-solid fa-tractor text-lg"></i>
-                    <span id="tabMachineriesLabel">Machineries</span>
-                </button>
-                <button id="tabServicesBtn" onclick="switchCategoryTab('services')" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition text-gray-600 hover:bg-gray-100">
-                    <i class="fa-solid fa-wrench text-lg"></i>
-                    <span id="tabServicesLabel">Services & Mechanics</span>
-                </button>
-            </div>
-
-            <!-- Search and Filter Bar -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-gray-200/80 shadow-sm">
-                <div class="relative w-full sm:w-96">
-                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
-                    <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search machine or service name..." class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-leafGreen">
-                </div>
-                
-                <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
-                    <span class="text-xs font-semibold text-gray-500 hidden sm:inline" id="lblSortBy">Sort by:</span>
-                    <select id="sortBySelect" onchange="filterItems()" class="bg-gray-50 border border-gray-200 text-gray-700 text-xs font-semibold rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-leafGreen cursor-pointer w-full sm:w-auto">
-                        <option value="nearby">Proximity (Nearest First)</option>
-                        <option value="rating">Top Rated (Highest First)</option>
-                        <option value="price">Price (Lowest First)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- MACHINERIES GRID CONTAINER -->
-            <div id="machineriesView" class="space-y-4">
-                <h3 class="text-base font-bold text-gray-800 flex items-center space-x-2">
-                    <i class="fa-solid fa-wheat-awn text-leafGreen"></i>
-                    <span id="sectionTitleMachineries">Select Equipment to Hire</span>
-                </h3>
-                
-                <div id="machineryCardsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <!-- Cards dynamically populated via JS -->
-                </div>
-            </div>
-
-            <!-- SERVICES GRID CONTAINER -->
-            <div id="servicesView" class="hidden space-y-4">
-                <h3 class="text-base font-bold text-gray-800 flex items-center space-x-2">
-                    <i class="fa-solid fa-screwdriver-wrench text-leafGreen"></i>
-                    <span id="sectionTitleServices">Select Repair & On-Farm Technician Service</span>
-                </h3>
-                
-                <div id="serviceCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Cards dynamically populated via JS -->
-                </div>
-            </div>
-
-            <!-- NEARBY PROVIDERS / OWNERS LIST MODAL/PANEL -->
-            <div id="providersPanel" class="hidden bg-white rounded-3xl shadow-lg border border-gray-200/80 p-4 sm:p-6 space-y-4 transition">
-                <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-                    <button onclick="hideProvidersPanel()" class="text-xs font-bold text-leafGreen hover:text-emeraldDeep flex items-center space-x-1">
-                        <i class="fa-solid fa-arrow-left"></i>
-                        <span id="btnBackToGrid">Back to Options</span>
-                    </button>
-                    <div class="text-center">
-                        <h4 class="text-lg font-extrabold text-emeraldDeep" id="selectedItemTitle">Harvester Combine</h4>
-                        <p class="text-xs text-gray-500" id="selectedItemSubtitle">Available operators nearby in your Mandal</p>
+                <!-- Services Card Option -->
+                <div onclick="selectMainCategory('services')" id="cardServices" 
+                    class="group bg-white rounded-2xl p-6 shadow-md border-2 border-emerald-100 hover:border-kisan-medium hover:shadow-xl transition duration-300 cursor-pointer relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-6 -bottom-6 text-emerald-50 text-8xl group-hover:text-emerald-100 transition duration-300 pointer-events-none">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
                     </div>
-                    <div class="w-12"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-amber-100 text-amber-900 font-extrabold text-xs rounded-full uppercase tracking-wider" id="badgeServicesCount">6 Expert Services</span>
+                            <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition duration-300">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-1" id="catServicesTitle">Services</h2>
+                        <p class="text-xs text-amber-800 font-semibold mb-2" id="catServicesSub">कृषि सेवाएं / వ్యవసాయ సేవలు</p>
+                        <p class="text-xs text-slate-500 leading-relaxed" id="catServicesDesc">Mechanics, Electricians, Borewell Flushing, Haulage Logistics & Professional Skilled Drivers.</p>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold text-amber-700 group-hover:underline flex items-center gap-1">
+                            <span id="btnExploreServices">Explore Services</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </span>
+                        <span class="text-[10px] bg-slate-100 font-bold px-2 py-1 rounded text-slate-600">Rapid Assistance</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-CATEGORY ITEMS CONTAINER (Appears when Machineries or Services is active) -->
+            <div id="itemsContainerSection" class="bg-white rounded-2xl p-6 shadow-md border border-slate-200">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2" id="activeCategoryHeaderTitle">
+                            <i class="fa-solid fa-list-check text-kisan-medium"></i>
+                            <span>Select Required Equipment or Service</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5" id="activeCategoryHeaderSub">Click on any item to view nearby operators, distance & reviews</p>
+                    </div>
+
+                    <!-- Search Filter inside active items -->
+                    <div class="relative max-w-xs w-full">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="itemSearchInput" onkeyup="filterItemsList()" placeholder="Search item..." 
+                            class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-accent">
+                    </div>
                 </div>
 
-                <div id="providersListContainer" class="space-y-3 max-h-[600px] overflow-y-auto pr-1">
-                    <!-- Dynamic nearby providers will render here -->
+                <!-- Grid of items -->
+                <div id="itemsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamic rendering via JS -->
                 </div>
             </div>
 
@@ -367,1205 +345,1198 @@
 
     </main>
 
-    <!-- BOOKING & PAYMENT MODAL -->
-    <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 p-6 space-y-5 animate-in fade-in zoom-in duration-200">
-            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-limeAccent/20 text-leafGreen flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-calendar-check"></i>
+    <div id="operatorsModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fade-in">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-kisan-dark to-kisan-medium p-5 text-white flex items-center justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span id="operatorModalBadge" class="bg-kisan-accent text-kisan-darker text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase">Verified Operators</span>
+                        <span id="operatorModalItemName" class="text-xs text-emerald-200 font-semibold"></span>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-emeraldDeep" id="modalBookingHeader">Confirm Equipment Booking</h3>
-                        <p class="text-xs text-gray-500" id="modalBookingSubHeader">Provide land and timing requirements</p>
-                    </div>
+                    <h3 id="operatorModalTitle" class="text-xl font-extrabold mt-1">Nearby Available Operators</h3>
                 </div>
-                <button onclick="closeBookingModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold p-1">
+                <button onclick="closeOperatorsModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Filter sub-bar -->
+            <div class="bg-slate-50 p-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-600">
+                <span id="operatorCountText">Showing nearest operators within Telangana district</span>
+                <div class="flex gap-2">
+                    <button onclick="sortOperators('distance')" class="px-3 py-1 bg-white border rounded-lg hover:border-kisan-medium text-slate-700">Distance 📍</button>
+                    <button onclick="sortOperators('rating')" class="px-3 py-1 bg-white border rounded-lg hover:border-kisan-medium text-slate-700">Rating ⭐</button>
+                    <button onclick="sortOperators('price')" class="px-3 py-1 bg-white border rounded-lg hover:border-kisan-medium text-slate-700">Price 💰</button>
+                </div>
+            </div>
+
+            <!-- Operators Content List -->
+            <div id="operatorsList" class="p-5 overflow-y-auto custom-scrollbar space-y-4 flex-grow">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-fade-in">
+            <div class="bg-kisan-dark p-5 text-white flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] bg-kisan-accent text-kisan-darker font-bold px-2 py-0.5 rounded uppercase">Step 2 of 2</span>
+                    <h3 class="text-lg font-bold text-white mt-1" id="bookingModalHeading">Confirm Booking & Schedule</h3>
+                </div>
+                <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Provider & Machine Card Summary -->
-            <div id="bookingSummaryCard" class="bg-emeraldDeep/5 border border-limeAccent/30 rounded-2xl p-3.5 flex items-center space-x-3">
-                <!-- Injected via JS -->
-            </div>
+            <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="p-6 space-y-4 overflow-y-auto custom-scrollbar">
+                <!-- Operator Summary Banner -->
+                <div id="bookingOperatorSummary" class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex items-center gap-3">
+                    <!-- JS Injected -->
+                </div>
 
-            <!-- Form Inputs -->
-            <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+                <!-- Requirement Duration or Acreage -->
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1" id="lblDate">Work Date</label>
-                        <input type="date" id="bookingDate" required class="w-full p-2.5 text-xs border border-gray-200 rounded-xl font-semibold bg-gray-50 focus:bg-white focus:ring-2 focus:ring-leafGreen">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1" id="labelQuantity">Acres / Hours</label>
+                        <input type="number" id="bookingQuantity" min="1" value="2" required 
+                            class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1" id="lblTime">Start Time</label>
-                        <input type="time" id="bookingTime" required class="w-full p-2.5 text-xs border border-gray-200 rounded-xl font-semibold bg-gray-50 focus:bg-white focus:ring-2 focus:ring-leafGreen">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1" id="labelDate">Booking Date</label>
+                        <input type="date" id="bookingDate" required 
+                            class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium">
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1" id="lblDuration">Land Area (Acres) / Work Hours</label>
-                    <select id="bookingDuration" required class="w-full p-2.5 text-xs border border-gray-200 rounded-xl font-semibold bg-gray-50 focus:bg-white focus:ring-2 focus:ring-leafGreen">
-                        <option value="1 Acre (~1 Hour)">1 Acre (~1 Hour)</option>
-                        <option value="2 Acres (~2 Hours)" selected>2 Acres (~2 Hours)</option>
-                        <option value="5 Acres (~5 Hours)">5 Acres (~5 Hours)</option>
-                        <option value="10+ Acres (Full Day)">10+ Acres (Full Day Urgent Service)</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1" id="lblLandmark">Field Location / Landmark Tag</label>
-                    <input type="text" id="bookingLandmark" placeholder="e.g. Near Water Tank, Survey No. 142, Geesugonda" required class="w-full p-2.5 text-xs border border-gray-200 rounded-xl font-semibold bg-gray-50 focus:bg-white focus:ring-2 focus:ring-leafGreen">
-                </div>
-
-                <!-- Emergency Tag Option -->
-                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-center justify-between">
-                    <div class="flex items-center space-x-2">
-                        <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg"></i>
-                        <div>
-                            <span class="text-xs font-bold text-amber-900 block" id="lblEmergencyTag">Critical Harvest Emergency?</span>
-                            <span class="text-[10px] text-amber-700" id="lblEmergencySub">Prioritizes immediate dispatch</span>
-                        </div>
+                <!-- Priority Emergency Tag -->
+                <div class="bg-red-50 border border-red-200 p-3 rounded-xl flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-red-900 block flex items-center gap-1">
+                            <i class="fa-solid fa-bolt text-red-600"></i>
+                            <span id="lblEmergencyDispatch">Emergency Immediate Dispatch</span>
+                        </span>
+                        <span class="text-[10px] text-red-700">Guarantees operator departure within 15 mins</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="emergencyCheckbox" class="sr-only peer">
-                        <div class="w-9 h-5 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-600"></div>
-                    </label>
+                    <input type="checkbox" id="bookingEmergencyCheck" class="w-5 h-5 accent-red-600 rounded cursor-pointer">
                 </div>
 
-                <!-- Payment Options -->
+                <!-- Field Address / Note -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-2" id="lblPaymentMethod">Payment Mode Selection</label>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1" id="labelLandmark">Field Location / Landmark</label>
+                    <input type="text" id="bookingLandmark" placeholder="e.g. Near Water Tank, Sy. No 142" required 
+                        class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-kisan-medium">
+                </div>
+
+                <!-- Payment Option -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-2" id="labelPaymentMode">Payment Mode</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <label class="border-2 border-leafGreen bg-mintLight/30 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:bg-mintLight transition text-center" id="paymentCodCard">
-                            <input type="radio" name="paymentMethod" value="COD" checked onclick="togglePaymentView('COD')" class="accent-leafGreen mb-1">
-                            <i class="fa-solid fa-hand-holding-dollar text-xl text-leafGreen mb-1"></i>
-                            <span class="text-xs font-bold text-emeraldDeep" id="payCodTitle">Pay After Work (COD)</span>
-                            <span class="text-[10px] text-gray-500" id="payCodSub">Pay cash to operator</span>
+                        <label class="border-2 border-kisan-medium bg-emerald-50/50 p-3 rounded-xl flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-800">
+                            <input type="radio" name="paymentMode" value="COD" checked class="accent-kisan-medium">
+                            <i class="fa-solid fa-hand-holding-dollar text-emerald-600 text-base"></i>
+                            <span>Pay Operator Cash</span>
                         </label>
-
-                        <label class="border-2 border-gray-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition text-center" id="paymentOnlineCard">
-                            <input type="radio" name="paymentMethod" value="ONLINE" onclick="togglePaymentView('ONLINE')" class="accent-leafGreen mb-1">
-                            <i class="fa-solid fa-qrcode text-xl text-leafGreen mb-1"></i>
-                            <span class="text-xs font-bold text-emeraldDeep" id="payOnlineTitle">UPI / Online QR</span>
-                            <span class="text-[10px] text-gray-500" id="payOnlineSub">Instant PhonePe / GPay</span>
+                        <label class="border-2 border-slate-200 p-3 rounded-xl flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-800 hover:border-kisan-medium">
+                            <input type="radio" name="paymentMode" value="UPI" class="accent-kisan-medium">
+                            <i class="fa-solid fa-qrcode text-blue-600 text-base"></i>
+                            <span>UPI / PhonePe QR</span>
                         </label>
                     </div>
                 </div>
 
-                <!-- Online Payment QR Simulation Box (Hidden by default) -->
-                <div id="qrSimulationBox" class="hidden bg-gray-50 border border-gray-200 rounded-xl p-4 text-center space-y-2">
-                    <p class="text-xs font-bold text-gray-700" id="qrInstruction">Scan & Pay via any UPI App</p>
-                    <div class="w-32 h-32 mx-auto bg-white p-2 rounded-lg border border-gray-300 shadow-inner flex items-center justify-center relative">
-                        <!-- Simulated QR SVG -->
-                        <svg class="w-full h-full text-emeraldDeep" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M0 0h30v30H0zM10 10h10v10H10zM70 0h30v30H70zM80 10h10v10H80zM0 70h30v30H0zM10 80h10v10H10zM40 10h10v10H40zM50 20h10v10H50zM40 40h20v20H40zM70 50h10v10H70zM80 70h20v20H80zM50 80h20v10H50z"/>
-                        </svg>
-                        <div class="absolute inset-0 bg-white/80 backdrop-blur-2xs flex items-center justify-center hidden" id="qrSuccessOverlay">
-                            <span class="text-emeraldDeep font-extrabold text-xs flex items-center"><i class="fa-solid fa-circle-check text-green-600 mr-1 text-base"></i> UPI Verified</span>
-                        </div>
+                <!-- Total Estimation -->
+                <div class="bg-slate-900 text-white p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest block" id="lblTotalEstimate">Estimated Amount</span>
+                        <span class="text-xs text-emerald-400 font-medium">Includes direct operator pay</span>
                     </div>
-                    <p class="text-[11px] text-gray-500 font-semibold" id="simulatedUpiId">UPI ID: kisandost@yesbank</p>
+                    <span id="bookingEstimatedCost" class="text-2xl font-extrabold text-kisan-pale">₹3,600</span>
                 </div>
 
-                <!-- Final Action Buttons -->
-                <div class="pt-2">
-                    <button type="submit" class="w-full py-3.5 bg-leafGreen hover:bg-emeraldDeep text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
-                        <span id="btnConfirmBooking">Confirm Booking & Dispatch</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
+                <button type="submit" 
+                    class="w-full py-3.5 bg-gradient-to-r from-kisan-medium to-kisan-dark text-white font-bold rounded-xl shadow-lg hover:from-kisan-dark hover:to-kisan-darker transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span id="btnConfirmBookingText">Confirm & Track Operator Live</span>
+                </button>
             </form>
         </div>
     </div>
 
-    <!-- RAPIDO STYLE LIVE TRACKING SCREEN -->
-    <div id="liveTrackingModal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[95vh] overflow-hidden shadow-2xl border border-gray-100 flex flex-col">
+    <div id="trackingModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-fade-in relative">
             
-            <!-- Tracking Top Bar -->
-            <div class="bg-emeraldDeep text-white p-4 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-3 h-3 rounded-full bg-limeAccent animate-ping"></div>
+            <!-- Live Tracking Top Bar -->
+            <div class="bg-kisan-dark text-white p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
                     <div>
-                        <h3 class="text-base font-bold text-white" id="trackHeader">Live Equipment Dispatch Tracking</h3>
-                        <p class="text-xs text-limeAccent font-medium" id="trackSubHeader">Machine on the way to your field</p>
+                        <span class="text-[10px] bg-emerald-800 text-emerald-200 font-bold px-2 py-0.5 rounded uppercase">LIVE RAPIDO TRACKING</span>
+                        <h3 class="text-base font-bold text-white">Operator En Route to Your Field</h3>
                     </div>
                 </div>
-                <button onclick="closeTrackingModal()" class="text-white/80 hover:text-white p-1 text-lg">
+                <button onclick="closeTrackingModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Animated Map Canvas Container -->
-            <div class="relative w-full h-64 sm:h-80 bg-emerald-900 overflow-hidden">
-                <canvas id="trackingMapCanvas" class="w-full h-full block"></canvas>
+            <!-- Canvas Map Display -->
+            <div class="relative bg-emerald-900 h-64 sm:h-72 w-full">
+                <canvas id="liveMapCanvas" class="w-full h-full block"></canvas>
                 
-                <!-- Overlay ETA Tag -->
-                <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-md border border-gray-200 flex items-center space-x-2">
-                    <i class="fa-solid fa-stopwatch text-earthOrange text-base animate-spin"></i>
+                <!-- Floating ETA Overlay -->
+                <div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl shadow border border-emerald-200 flex items-center gap-2">
+                    <i class="fa-solid fa-clock text-kisan-medium text-sm animate-spin"></i>
                     <div>
-                        <span class="text-[10px] uppercase text-gray-500 font-bold block" id="lblEta">Estimated Arrival</span>
-                        <span class="text-xs sm:text-sm font-extrabold text-emeraldDeep" id="etaCountdownText">18 Minutes (1.8 km)</span>
+                        <p class="text-[9px] text-slate-500 uppercase font-bold">Estimated Arrival</p>
+                        <p id="trackingETA" class="text-xs font-black text-slate-800">18 Minutes</p>
                     </div>
                 </div>
 
-                <div class="absolute bottom-3 right-3 bg-emeraldDeep/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-limeAccent/30 text-white text-[11px] font-bold">
-                    <i class="fa-solid fa-satellite text-limeAccent mr-1"></i> Live GPS Active
+                <!-- Map Recenter Button -->
+                <button onclick="recenterMap()" class="absolute bottom-3 right-3 bg-white text-slate-800 p-2.5 rounded-full shadow-lg border border-slate-200 hover:bg-slate-50">
+                    <i class="fa-solid fa-location-crosshairs text-base text-kisan-dark"></i>
+                </button>
+            </div>
+
+            <!-- Live Status Progress Steps -->
+            <div class="bg-slate-50 p-4 border-b border-slate-200">
+                <div class="flex justify-between items-center text-center relative max-w-md mx-auto">
+                    <div class="flex flex-col items-center z-10">
+                        <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shadow">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-800 mt-1">Accepted</span>
+                    </div>
+                    <div class="h-1 bg-emerald-500 flex-grow -mx-2 mb-4"></div>
+                    <div class="flex flex-col items-center z-10">
+                        <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shadow animate-pulse">
+                            <i class="fa-solid fa-truck-monster"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-emerald-700 mt-1">En Route</span>
+                    </div>
+                    <div class="h-1 bg-slate-300 flex-grow -mx-2 mb-4"></div>
+                    <div class="flex flex-col items-center z-10">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold">
+                            <i class="fa-solid fa-flag-checkered"></i>
+                        </div>
+                        <span class="text-[10px] font-medium text-slate-400 mt-1">Arrived</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Driver & Machine Info Card -->
-            <div class="p-4 sm:p-6 space-y-4 bg-gray-50 flex-grow overflow-y-auto">
-                <!-- Status Stepper Bar -->
-                <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm flex justify-between items-center text-center">
-                    <div class="flex-1 text-emeraldDeep font-bold text-xs" id="step1">
-                        <div class="w-7 h-7 mx-auto rounded-full bg-emeraldDeep text-white flex items-center justify-center text-xs mb-1">1</div>
-                        <span id="txtStep1">Confirmed</span>
-                    </div>
-                    <div class="w-8 h-0.5 bg-emeraldDeep" id="line1"></div>
-                    <div class="flex-1 text-emeraldDeep font-bold text-xs" id="step2">
-                        <div class="w-7 h-7 mx-auto rounded-full bg-emeraldDeep text-white flex items-center justify-center text-xs mb-1 ring-4 ring-mintLight">2</div>
-                        <span id="txtStep2">En Route</span>
-                    </div>
-                    <div class="w-8 h-0.5 bg-gray-300" id="line2"></div>
-                    <div class="flex-1 text-gray-400 font-semibold text-xs" id="step3">
-                        <div class="w-7 h-7 mx-auto rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs mb-1">3</div>
-                        <span id="txtStep3">Arrived</span>
-                    </div>
-                    <div class="w-8 h-0.5 bg-gray-300" id="line3"></div>
-                    <div class="flex-1 text-gray-400 font-semibold text-xs" id="step4">
-                        <div class="w-7 h-7 mx-auto rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs mb-1">4</div>
-                        <span id="txtStep4">Complete</span>
-                    </div>
-                </div>
-
-                <!-- Driver Contact Card -->
-                <div id="liveDriverCard" class="bg-white rounded-2xl border border-gray-200 p-4 flex items-center justify-between shadow-sm">
-                    <!-- Populated dynamically -->
-                </div>
-
-                <!-- Action Controls -->
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="callOperatorDirect()" class="py-3 bg-leafGreen hover:bg-emeraldDeep text-white font-bold rounded-xl shadow transition text-xs sm:text-sm flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-phone"></i>
-                        <span id="btnCallDriver">Call Driver Now</span>
-                    </button>
-                    <button onclick="cancelActiveBooking()" class="py-3 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold rounded-xl transition text-xs sm:text-sm flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-ban"></i>
-                        <span id="btnCancelBooking">Cancel Order</span>
-                    </button>
-                </div>
+            <!-- Operator Call Card -->
+            <div id="trackingOperatorDetails" class="p-4 bg-white flex items-center justify-between gap-3 border-b border-slate-100">
+                <!-- JS populated -->
             </div>
 
+            <!-- Emergency Actions -->
+            <div class="p-4 bg-slate-50 flex items-center justify-between gap-3">
+                <button onclick="triggerSimulatedCall()" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Call Operator Now</span>
+                </button>
+                <button onclick="finishJobSimulation()" class="flex-1 py-2.5 bg-kisan-dark hover:bg-kisan-darker text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow">
+                    <i class="fa-solid fa-circle-check text-kisan-pale"></i>
+                    <span>Mark Job Completed</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- REVIEWS MODAL -->
-    <div id="reviewsModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full max-h-[80vh] overflow-y-auto shadow-2xl border border-gray-100 p-6 space-y-4">
-            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                <div>
-                    <h3 class="text-base font-bold text-emeraldDeep" id="reviewsModalTitle">Farmer Ratings & Reviews</h3>
-                    <p class="text-xs text-gray-500" id="reviewsModalSub">Verified feedback from local farmers</p>
+    <div id="settingsDrawer" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex justify-end transition-all">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between animate-fade-in">
+            
+            <!-- Drawer Header -->
+            <div class="bg-kisan-dark p-5 text-white flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-kisan-medium flex items-center justify-center border border-kisan-pale">
+                        <i class="fa-solid fa-user-gear text-lg text-kisan-pale"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base" id="settingsHeaderTitle">User Settings & Profile</h3>
+                        <p class="text-[11px] text-emerald-200" id="settingsHeaderSub">Manage bookings, reviews & details</p>
+                    </div>
                 </div>
-                <button onclick="closeReviewsModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold">
+                <button onclick="toggleSettingsDrawer()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <div id="reviewsList" class="space-y-3">
-                <!-- Populated dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ACTIVE BOOKINGS DRAWER / MODAL -->
-    <div id="activeBookingsModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-gray-100 p-6 space-y-4">
-            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-clock-rotate-left text-leafGreen text-xl"></i>
-                    <h3 class="text-lg font-bold text-emeraldDeep" id="myBookingsTitle">My Machine & Service Bookings</h3>
-                </div>
-                <button onclick="closeActiveBookingsModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold">
-                    <i class="fa-solid fa-xmark"></i>
+            <!-- Drawer Tabs -->
+            <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-bold text-slate-600">
+                <button onclick="switchSettingsTab('profile')" id="tabBtnProfile" class="flex-1 py-3 border-b-2 border-kisan-medium text-kisan-medium text-center">
+                    Profile 👤
+                </button>
+                <button onclick="switchSettingsTab('bookings')" id="tabBtnBookings" class="flex-1 py-3 border-b-2 border-transparent hover:text-slate-900 text-center">
+                    Bookings 📜
+                </button>
+                <button onclick="switchSettingsTab('reviews')" id="tabBtnReviews" class="flex-1 py-3 border-b-2 border-transparent hover:text-slate-900 text-center">
+                    Reviews ⭐
                 </button>
             </div>
 
-            <div id="activeBookingsList" class="space-y-3">
-                <!-- List inserted via JS -->
+            <!-- Drawer Scroll Content -->
+            <div class="p-5 overflow-y-auto custom-scrollbar flex-grow space-y-5">
+
+                <!-- PROFILE TAB CONTENT -->
+                <div id="tabContentProfile" class="space-y-4">
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl">
+                        <span class="text-[10px] uppercase tracking-wider font-extrabold text-emerald-800">REGISTERED FARMER</span>
+                        <div class="mt-3 space-y-2 text-xs">
+                            <div class="flex justify-between py-1 border-b border-emerald-200/60">
+                                <span class="text-slate-500">Phone Number:</span>
+                                <span id="settingUserPhone" class="font-bold text-slate-800">+91 9876543210</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-emerald-200/60">
+                                <span class="text-slate-500">District (जिला):</span>
+                                <span id="settingUserDistrict" class="font-bold text-slate-800">Karimnagar</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-500">Mandal (मण्डल):</span>
+                                <span id="settingUserMandal" class="font-bold text-slate-800">Huzurabad</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Emergency Helplines</h4>
+                        <div class="text-xs space-y-2">
+                            <a href="tel:108" class="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-200 hover:bg-slate-100">
+                                <span class="font-semibold text-slate-700">Telangana Rythu Bharosa Helpline</span>
+                                <span class="font-extrabold text-emerald-700">📞 108 / 1551</span>
+                            </a>
+                            <a href="tel:18001801551" class="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-200 hover:bg-slate-100">
+                                <span class="font-semibold text-slate-700">Kisan Call Center</span>
+                                <span class="font-extrabold text-emerald-700">📞 1800-180-1551</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOOKINGS TAB CONTENT -->
+                <div id="tabContentBookings" class="space-y-3 hidden">
+                    <h4 class="text-xs font-bold text-slate-700 uppercase">Past & Active Bookings</h4>
+                    <div id="pastBookingsList" class="space-y-3">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- REVIEWS TAB CONTENT -->
+                <div id="tabContentReviews" class="space-y-4 hidden">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold text-slate-700 uppercase">Uploaded Reviews</h4>
+                        <button onclick="openNewReviewModal()" class="text-xs font-bold text-kisan-medium hover:underline">+ Add Review</button>
+                    </div>
+                    <div id="userReviewsList" class="space-y-3">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Drawer Footer (Logout) -->
+            <div class="p-4 bg-slate-50 border-t border-slate-200">
+                <button onclick="performLogout()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow transition">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Log Out Account</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- CUSTOM NOTIFICATION MODAL (NO ALERT) -->
-    <div id="customAlertModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-gray-100 transform transition">
-            <div id="alertIconBox" class="w-16 h-16 mx-auto rounded-full bg-mintLight text-leafGreen flex items-center justify-center text-3xl shadow-md">
-                <i class="fa-solid fa-circle-check"></i>
+    <!-- Direct Phone Call Simulation Modal -->
+    <div id="callModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl animate-fade-in space-y-4">
+            <div class="w-20 h-20 rounded-full bg-emerald-100 text-emerald-700 mx-auto flex items-center justify-center text-3xl animate-bounce">
+                <i class="fa-solid fa-phone-volume"></i>
             </div>
-            <h3 id="alertTitle" class="text-xl font-extrabold text-emeraldDeep">Registration Successful!</h3>
-            <p id="alertMessage" class="text-xs text-gray-600 leading-relaxed">Welcome to Kisan Dost network.</p>
-            <button onclick="closeCustomAlert()" class="w-full py-3 bg-leafGreen hover:bg-emeraldDeep text-white font-bold rounded-xl shadow transition text-sm">
-                Continue
+            <div>
+                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded uppercase">Simulated Direct Call</span>
+                <h3 id="callOperatorName" class="text-xl font-bold text-slate-800 mt-1">Ramesh Reddy</h3>
+                <p id="callOperatorPhone" class="text-xs text-slate-500 font-semibold">+91 98480 12345</p>
+            </div>
+            <div class="bg-slate-50 p-3 rounded-xl border text-xs text-slate-600">
+                Connecting directly to nearest operator's field phone line...
+            </div>
+            <button onclick="closeCallModal()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs shadow">
+                End Call Simulation
             </button>
         </div>
     </div>
 
-    <footer class="bg-emeraldDeep text-white border-t border-limeAccent/20 mt-10 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-limeAccent/80 gap-3">
-            <div class="flex items-center space-x-2">
-                <i class="fa-solid fa-seedling text-warmGold text-sm"></i>
-                <span>© 2026 Kisan Dost Technologies - Empowering Indian Agriculture</span>
+    <!-- Add Review Modal -->
+    <div id="addReviewModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl animate-fade-in space-y-4">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="font-bold text-slate-800">Add Operator Review</h3>
+                <button onclick="closeAddReviewModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="flex space-x-4">
-                <span class="hover:underline cursor-pointer">Farmer Support Helpline: 1800-123-FARM</span>
-                <span>•</span>
-                <span class="hover:underline cursor-pointer">24/7 Mandal Dispatch</span>
-            </div>
+            <form onsubmit="handleSaveReview(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Operator / Equipment Name</label>
+                    <input type="text" id="revOperatorInput" required placeholder="e.g. John Deere Harvester - Mallesh" class="w-full px-3 py-2 bg-slate-50 border rounded-xl text-xs font-semibold">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Rating (1 to 5 ⭐)</label>
+                    <select id="revRatingInput" class="w-full px-3 py-2 bg-slate-50 border rounded-xl text-xs font-semibold">
+                        <option value="5">5 ⭐⭐⭐⭐⭐ - Excellent Service</option>
+                        <option value="4">4 ⭐⭐⭐⭐ - Good & Timely</option>
+                        <option value="3">3 ⭐⭐⭐ - Average</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Comments</label>
+                    <textarea id="revCommentInput" rows="3" required placeholder="Describe speed, machine condition, operator behavior..." class="w-full p-3 bg-slate-50 border rounded-xl text-xs font-semibold"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-kisan-medium hover:bg-kisan-dark text-white font-bold rounded-xl text-xs shadow">
+                    Submit Review
+                </button>
+            </form>
         </div>
-    </footer>
+    </div>
+
+    <!-- Registration Completed Modal Banner -->
+    <div id="welcomeModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl animate-fade-in space-y-4">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-3xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-slate-800" id="welcomeTitle">Registration Complete!</h3>
+                <p class="text-xs text-slate-500 mt-1" id="welcomeSub">Welcome to Kisan Dost Network</p>
+            </div>
+            <div class="bg-slate-50 p-3 rounded-2xl border text-left text-xs space-y-1.5">
+                <p><span class="font-bold text-slate-700">Phone:</span> <span id="welcPhone"></span></p>
+                <p><span class="font-bold text-slate-700">District:</span> <span id="welcDistrict"></span></p>
+                <p><span class="font-bold text-slate-700">Mandal:</span> <span id="welcMandal"></span></p>
+            </div>
+            <button onclick="closeWelcomeModal()" class="w-full py-3 bg-kisan-medium hover:bg-kisan-dark text-white font-bold rounded-xl text-xs shadow">
+                Start Booking Equipment
+            </button>
+        </div>
+    </div>
 
     <script>
-        /* APP STATE OBJECT */
-        const state = {
-            lang: 'en',
+        // Telangana 33 Districts Datasets with corresponding authentic Mandals
+        const telanganaData = {
+            "Adilabad": ["Adilabad Urban", "Adilabad Rural", "Bazarhatnoor", "Bela", "Boroath", "Gudihathnoor", "Indervelly", "Jainath", "Mavala", "Narnoor", "Utnoor"],
+            "Kumuram Bheem Asifabad": ["Asifabad", "Kagaznagar", "Sirpur (T)", "Rebbena", "Wankidi", "Kerameri", "Tiryani", "Penchikalpet"],
+            "Mancherial": ["Mancherial", "Bellampalle", "Mandamarri", "Chennur", "Jaipur", "Luxettipet", "Naspur", "Kotapalle"],
+            "Nirmal": ["Nirmal", "Bhainsa", "Khanapur", "Dilawarpur", "Kubeer", "Mudhole", "Sarangapur", "Laxmanchanda"],
+            "Nizamabad": ["Nizamabad North", "Nizamabad South", "Bodhan", "Armoor", "Balkonda", "Dichpally", "Morthad", "Bheemgal"],
+            "Jagtial": ["Jagtial", "Korutla", "Metpally", "Raikal", "Dharmapuri", "Mallial", "Pegadapally", "Velgatoor"],
+            "Peddapalli": ["Peddapalli", "Ramagundam", "Manthani", "Godavarikhani", "Sultanabad", "Julapalle", "Dharmaram"],
+            "Jayashankar Bhupalpally": ["Bhupalpally", "Kataram", "Mahadevpur", "Chityal", "Ghanpur", "Tekumatla"],
+            "Bhadradri Kothagudem": ["Kothagudem", "Palwancha", "Yellandu", "Manuguru", "Bhadrachalam", "Burgampahad", "Aswaraopeta"],
+            "Mahabubabad": ["Mahabubabad", "Thorrur", "Maripeda", "Kuravi", "Kesamudram", "Bayyaram", "Dornakal"],
+            "Warangal": ["Warangal", "Narsampet", "Wardhannapet", "Chennaraopet", "Khanapur", "Parvathagiri", "Geesugonda"],
+            "Hanumakonda": ["Hanumakonda", "Kazipet", "Bheemadevarapally", "Dharmasagar", "Elkaturthy", "Kamalapur", "Parkal"],
+            "Karimnagar": ["Karimnagar", "Huzurabad", "Choppadandi", "Manakondur", "Gangadhara", "Thimmapur", "Veenavanka"],
+            "Rajanna Sircilla": ["Sircilla", "Vemulawada", "Chandurthi", "Gambhiraopet", "Konaraopet", "Mustabad", "Yellareddypet"],
+            "Kamareddy": ["Kamareddy", "Banswada", "Yellareddy", "Machareddy", "Domakonda", "Pitlam", "Jukkal", "Madnoor"],
+            "Sangareddy": ["Sangareddy", "Zaheerabad", "Patancheru", "Narayankhed", "Sadasivpet", "Jogipet", "Kandi"],
+            "Medak": ["Medak", "Toopran", "Ramayampet", "Narsapur", "Chegunta", "Kowdipally", "Alladurg"],
+            "Siddipet": ["Siddipet Urban", "Siddipet Rural", "Gajwel", "Dubbak", "Husnabad", "Cherial", "Mulugu"],
+            "Jangaon": ["Jangaon", "Station Ghanpur", "Palakurthi", "Bachannapet", "Devaruppula", "Lingala Ghanpur"],
+            "Yadadri Bhuvanagiri": ["Bhongir", "Choutuppal", "Alair", "Ramannapet", "Motakondur", "Bibinagar", "Pochampally"],
+            "Medchal-Malkajgiri": ["Medchal", "Malkajgiri", "Quthbullapur", "Alwal", "Kukatpally", "Ghatkesar", "Keesara"],
+            "Hyderabad": ["Amberpet", "Asifnagar", "Bahadurpura", "Charminar", "Khairatabad", "Musheerabad", "Secunderabad", "Shaikpet"],
+            "Rangareddy": ["Ibrahimpatnam", "Rajendranagar", "Maheshwaram", "Chevella", "Shamshabad", "Hayathnagar", "Serilingampally"],
+            "Vikarabad": ["Vikarabad", "Tandur", "Pargi", "Kodangal", "Nawabpet", "Dharur", "Mominpet"],
+            "Mahabubnagar": ["Mahabubnagar Urban", "Mahabubnagar Rural", "Jadcherla", "Devarkadra", "Midjil", "Nawabpet", "Rajapur"],
+            "Jogulamba Gadwal": ["Gadwal", "Alampur", "Ieeja", "Itikyala", "Manopad", "Maldakal", "Dharoor"],
+            "Wanaparthy": ["Wanaparthy", "Gopalpet", "Kothakota", "Pebbair", "Pangal", "Revally", "Srirangapur"],
+            "Nagarkurnool": ["Nagarkurnool", "Achampet", "Kalwakurthy", "Kollapur", "Telakapally", "Bijinapally", "Lingal"],
+            "Nalgonda": ["Nalgonda", "Miryalaguda", "Devarakonda", "Nakrekal", "Narketpally", "Chandur", "Munugode"],
+            "Suryapet": ["Suryapet", "Kodad", "Huzurnagar", "Tirumalagiri", "Garidepally", "Munagala", "Mellachervu"],
+            "Khammam": ["Khammam Urban", "Khammam Rural", "Sathupally", "Madhira", "Wyra", "Kalluru", "Penuballi"],
+            "Mulugu": ["Mulugu", "Eturnagaram", "Mangapet", "Venkatapur", "Tadvai", "Govindaraopet", "Wazeedu"],
+            "Narayanpet": ["Narayanpet", "Makhtal", "Kosgi", "Damaragidda", "Utkoor", "Maganoor", "Narwa"]
+        };
+
+        // Complete 11 Machineries and 6 Services Catalog
+        const catalog = {
+            machineries: [
+                { id: 'm1', icon: '🚜', titleEn: 'Combine Harvester', titleHi: 'कंबाइन हार्वेस्टर', titleTe: 'కంబైన్ హార్వెస్టర్', price: 1800, unit: 'hr', descEn: 'High capacity paddy & grain harvesting with automatic cleaning.', emergencyReady: true },
+                { id: 'm2', icon: '🌱', titleEn: 'Rice Transplanter', titleHi: 'धान रोपाई मशीन', titleTe: 'వరి నాటు యంత్రం', price: 1200, unit: 'acre', descEn: '8-row automatic paddy seedling transplanting machine.', emergencyReady: false },
+                { id: 'm3', icon: '🛸', titleEn: 'Drone Fertilizer Spreader', titleHi: 'ड्रोन उर्वरक स्प्रेयर', titleTe: 'డ్రోన్ ఎరువుల స్ప్రేయర్', price: 450, unit: 'acre', descEn: 'Precision GPS guided pesticide & liquid fertilizer aerial drone.', emergencyReady: true },
+                { id: 'm4', icon: '🚜', titleEn: 'Heavy Duty Tractor', titleHi: 'भारी ट्रैक्टर 50+ HP', titleTe: 'హెవీ డ్యూటీ ట్రాక్టర్', price: 800, unit: 'hr', descEn: '55 HP 4WD heavy duty tractor with multi-attachment hook.', emergencyReady: true },
+                { id: 'm5', icon: '⚙️', titleEn: 'Rotavator', titleHi: 'रोटावेटर', titleTe: 'రోటవేటర్', price: 900, unit: 'hr', descEn: 'Fast seedbed preparation & deep soil pulverization.', emergencyReady: false },
+                { id: 'm6', icon: '🌾', titleEn: 'Cultivator', titleHi: 'कल्टीवेटर', titleTe: 'కల్టివేటర్', price: 700, unit: 'hr', descEn: '9-tyne spring cultivator for field plowing.', emergencyReady: false },
+                { id: 'm7', icon: '⛏️', titleEn: 'Ploughs', titleHi: 'एमबी हल / डिस्क हल', titleTe: 'ఎంబీ నాగిలి', price: 750, unit: 'hr', descEn: 'Reversible mouldboard plough for deep tillage.', emergencyReady: false },
+                { id: 'm8', icon: '📦', titleEn: 'Paddy Loader Machine', titleHi: 'धान लोडर मशीन', titleTe: 'వరి లోడర్ మెషిన్', price: 650, unit: 'hr', descEn: 'Rapid grain loading and bag elevator mechanism.', emergencyReady: true },
+                { id: 'm9', icon: '🧹', titleEn: 'Paddy Cleaning Machine', titleHi: 'धान सफाई मशीन', titleTe: 'వరి క్లీనింగ్ మెషిన్', price: 500, unit: 'hr', descEn: 'Chaff & husk separator for harvested paddy.', emergencyReady: false },
+                { id: 'm10', icon: '🚜', titleEn: 'Power Tiller', titleHi: 'पावर टिलर', titleTe: 'పవర్ టిల్లర్', price: 500, unit: 'hr', descEn: 'Compact 15 HP walking tractor for small wetlands.', emergencyReady: false },
+                { id: 'm11', icon: '🚧', titleEn: 'Bund Trimming Machine', titleHi: 'मेड़ काटने की मशीन', titleTe: 'గట్ల తయారీ యంత్రం', price: 600, unit: 'hr', descEn: 'Automatic field boundary bund maker and trimmer.', emergencyReady: false }
+            ],
+            services: [
+                { id: 's1', icon: '🚚', titleEn: 'Tractor Haulage Services', titleHi: 'ट्रैक्टर माल ढुलाई', titleTe: 'ట్రాక్టర్ రవాణా సేవలు', price: 700, unit: 'trip', descEn: 'Heavy trolley crop transportation to local Mandi.', emergencyReady: true },
+                { id: 's2', icon: '🔧', titleEn: 'Machinery Mechanic', titleHi: 'कृषि उपकरण मैकेनिक', titleTe: 'మెకానిక్ సేవలు', price: 350, unit: 'visit', descEn: 'On-field engine breakdown & hydraulic pump technician.', emergencyReady: true },
+                { id: 's3', icon: '⚡', titleEn: 'Field Electrician', titleHi: 'कृषि बिजली मिस्त्री', titleTe: 'ఎలక్ట్రీషియన్', price: 300, unit: 'visit', descEn: 'Starter box, transformer & 3-phase pump motor repair.', emergencyReady: true },
+                { id: 's4', icon: '💧', titleEn: 'Motor & Pump Repair', titleHi: 'सबमर्सिबल मोटर मरम्मत', titleTe: 'మోటార్ & పంప్ రిపేర్', price: 400, unit: 'visit', descEn: 'Submersible pump extraction, rewinding & pipe fix.', emergencyReady: true },
+                { id: 's5', icon: '🛢️', titleEn: 'Borewell Flushing Mechanic', titleHi: 'बोरवेल फ्लशिंग', titleTe: 'బోరు బావి ఫ్లషింగ్', price: 1500, unit: 'bore', descEn: 'High pressure air compressor borewell silt cleaning.', emergencyReady: false },
+                { id: 's6', icon: '👨‍🌾', titleEn: 'Professional Drivers / Operators', titleHi: 'कुशल ऑपरेटर', titleTe: 'ప్రొఫెషనల్ డ్రైవర్లు', price: 500, unit: 'day', descEn: 'Experienced tractor & heavy harvester certified operators.', emergencyReady: true }
+            ]
+        };
+
+        // Sample Operators Database
+        const operatorsDatabase = [
+            { id: 'op1', name: 'Mallesh Yadav', phone: '+91 98480 11223', rating: 4.9, reviews: 38, dist: 1.4, price: 1800, exp: '8 Yrs Exp • Mahindra AC Cabin', verified: true, emergency: true },
+            { id: 'op2', name: 'Srinivas Rao', phone: '+91 94401 55667', rating: 4.8, reviews: 29, dist: 2.8, price: 1750, exp: '5 Yrs Exp • John Deere 75HP', verified: true, emergency: true },
+            { id: 'op3', name: 'Kishan Goud', phone: '+91 99890 33445', rating: 4.7, reviews: 19, dist: 4.2, price: 1700, exp: '10 Yrs Exp • New Holland', verified: true, emergency: false },
+            { id: 'op4', name: 'Venkatesh Naik', phone: '+91 80081 77889', rating: 4.9, reviews: 45, dist: 1.1, price: 350, exp: 'Certified Mechanic • Fast Field Arrival', verified: true, emergency: true },
+            { id: 'op5', name: 'Anjaneyulu M.', phone: '+91 91002 44556', rating: 4.6, reviews: 14, dist: 3.5, price: 300, exp: '3-Phase Electrical Specialist', verified: true, emergency: true }
+        ];
+
+        // Multilingual Dictionary
+        const i18n = {
+            en: {
+                navTitle: 'Kisan Dost',
+                navSubtitle: 'Emergency Agri Network',
+                navUserBadge: 'Farmer',
+                loginHeaderTitle: 'Farmer Registration & Login',
+                loginHeaderSub: 'Access instant machinery & verified operators in Telangana',
+                labelMobile: 'Mobile Number',
+                labelDistrict: 'Select District (तेलंगाना जिला)',
+                labelMandal: 'Select Mandal (मण्डल)',
+                btnSubmitLogin: 'Enter Kisan Dost Dashboard',
+                badgeCritical: 'CRITICAL EMERGENCY',
+                emergencyBannerTitle: 'Urgent Harvester & Emergency Repair Assistance',
+                emergencyBannerSub: 'Priority matching for rain threats, sudden breakdown & crop harvesting deadlines',
+                lblEmergencyOnly: '30-Min Operators Only',
+                catMachineriesTitle: 'Machineries',
+                catMachineriesSub: 'कृषि मशीनरी / వ్యవసాయ యంత్రాలు',
+                catServicesTitle: 'Services',
+                catServicesSub: 'कृषि सेवाएं / వ్యవసాయ సేవలు',
+                btnExploreMachinery: 'Explore Machineries',
+                btnExploreServices: 'Explore Services'
+            },
+            hi: {
+                navTitle: 'किसान दोस्त',
+                navSubtitle: 'आपातकालीन कृषि नेटवर्क',
+                navUserBadge: 'किसान',
+                loginHeaderTitle: 'किसान पंजीकरण एवं प्रवेश',
+                loginHeaderSub: 'तेलंगाना में त्वरित मशीनरी एवं सत्यापित ऑपरेटर खोजें',
+                labelMobile: 'मोबाइल नंबर',
+                labelDistrict: 'जिला चुनें (District)',
+                labelMandal: 'मण्डल चुनें (Mandal)',
+                btnSubmitLogin: 'किसान दोस्त डैशबोर्ड खोलें',
+                badgeCritical: 'आपातकालीन सेवा',
+                emergencyBannerTitle: 'तत्काल कंबाइन हार्वेस्टर व मैकेनिक सहायता',
+                emergencyBannerSub: 'बारिश के खतरे व फसल कटाई के लिए 30 मिनट में प्राथमिकता सेवा',
+                lblEmergencyOnly: 'केवल 30-मिनट ऑपरेटर',
+                catMachineriesTitle: 'कृषि मशीनरी',
+                catMachineriesSub: 'Machineries / వ్యవసాయ యంత్రాలు',
+                catServicesTitle: 'कृषि सेवाएं',
+                catServicesSub: 'Services / వ్యవసాయ సేవలు',
+                btnExploreMachinery: 'मशीनरी देखें',
+                btnExploreServices: 'सेवाएं देखें'
+            },
+            te: {
+                navTitle: 'కిసాన్ దోస్త్',
+                navSubtitle: 'అత్యవసర వ్యవసాయ నెట్‌వర్క్',
+                navUserBadge: 'రైతు',
+                loginHeaderTitle: 'రైతు నమోదు & లాగిన్',
+                loginHeaderSub: 'తెలంగాణలో తక్షణ యంత్రాలు & ధృవీకరించబడిన ఆపరేటర్లు',
+                labelMobile: 'మొబైల్ నంబర్',
+                labelDistrict: 'జిల్లాను ఎంచుకోండి (District)',
+                labelMandal: 'మండలాన్ని ఎంచుకోండి (Mandal)',
+                btnSubmitLogin: 'కిసాన్ దోస్త్ డాష్‌బోర్డ్ తెరవండి',
+                badgeCritical: 'అత్యవసర బుకింగ్',
+                emergencyBannerTitle: 'అత్యవసర హార్వెస్టర్ & రిపేర్ సేవలు',
+                emergencyBannerSub: 'వర్షపు ముప్పు మరియు అత్యవసర పంట కోతల కోసం 30 నిమిషాల సేవ',
+                lblEmergencyOnly: '30 నిమిషాల ఆపరేటర్లు మాత్రమే',
+                catMachineriesTitle: 'వ్యవసాయ యంత్రాలు',
+                catMachineriesSub: 'Machineries / कृषि मशीनरी',
+                catServicesTitle: 'వ్యవసాయ సేవలు',
+                catServicesSub: 'Services / कृषि सेवाएं',
+                btnExploreMachinery: 'యంత్రాలను చూడండి',
+                btnExploreServices: 'సేవలను చూడండి'
+            }
+        };
+
+        // App State Object
+        let state = {
+            currentLang: 'en',
             user: {
                 mobile: '',
                 district: '',
-                mandal: ''
+                mandal: '',
+                isLoggedIn: false
             },
-            currentCategory: 'machineries', // 'machineries' or 'services'
-            selectedItem: null, // item clicked from grid
-            selectedProvider: null,
-            bookings: [],
-            activeTrackingBooking: null,
-            animationFrameId: null
+            activeCategory: 'machineries', // 'machineries' | 'services'
+            emergencyOnly: false,
+            selectedItem: null,
+            selectedOperator: null,
+            bookingsHistory: [
+                { id: 'BK-9081', item: 'Combine Harvester', operator: 'Mallesh Yadav', phone: '+91 98480 11223', date: '2026-09-20', status: 'Completed', cost: 3600, acres: 2 }
+            ],
+            userReviews: [
+                { id: 'REV-1', operator: 'Mallesh Yadav - Combine Harvester', rating: 5, comment: 'Arrived in 20 minutes! Clean grain harvesting during urgent rain threat.' }
+            ]
         };
 
-        /* LOCALIZATION DICTIONARY */
-        const i18n = {
-            en: {
-                splashTitle: "Kisan Dost",
-                splashTagline: "Fast & Reliable Farm Equipment Booking",
-                headerSubtitle: "Equipment & Emergency Services",
-                loginTitle: "Farmer Login / Registration",
-                loginSubtitle: "Enter details to access nearby farm equipment",
-                lblMobile: "Mobile Number",
-                lblDistrict: "District",
-                lblMandal: "Mandal / Tehsil",
-                btnLogin: "Login & Enter App",
-                demoNoticeText: "Demo mode active: Instant setup without OTP delay for quick farmer testing.",
-                bannerBadge: "🚨 HARVEST EMERGENCY EXPRESS",
-                bannerTitle: "Critical Crops Emergency Machine Dispatch",
-                bannerDesc: "Sudden rainfall or unseasonal weather? Get Harvesters & Loaders within 30-45 minutes!",
-                bannerBtn: "Book Emergency Machine",
-                tabMachineriesLabel: "Machineries",
-                tabServicesLabel: "Services & Mechanics",
-                sectionTitleMachineries: "Select Equipment to Hire",
-                sectionTitleServices: "Select Repair & On-Farm Technician Service",
-                lblSortBy: "Sort by:",
-                btnBackToGrid: "Back to Options",
-                modalBookingHeader: "Confirm Booking",
-                modalBookingSubHeader: "Provide land and timing requirements",
-                lblDate: "Work Date",
-                lblTime: "Start Time",
-                lblDuration: "Land Area / Hours",
-                lblLandmark: "Field Location / Landmark Tag",
-                lblEmergencyTag: "Critical Harvest Emergency?",
-                lblEmergencySub: "Prioritizes immediate dispatch",
-                lblPaymentMethod: "Payment Mode Selection",
-                payCodTitle: "Pay After Work (COD)",
-                payCodSub: "Pay cash to operator",
-                payOnlineTitle: "UPI / Online QR",
-                payOnlineSub: "Instant PhonePe / GPay",
-                btnConfirmBooking: "Confirm Booking & Dispatch",
-                trackHeader: "Live Equipment Dispatch Tracking",
-                trackSubHeader: "Machine on the way to your field",
-                btnCallDriver: "Call Driver Now",
-                btnCancelBooking: "Cancel Order",
-                reviewsModalTitle: "Farmer Ratings & Reviews",
-                reviewsModalSub: "Verified feedback from local farmers",
-                myBookingsTitle: "My Machine & Service Bookings",
-                txtStep1: "Confirmed",
-                txtStep2: "En Route",
-                txtStep3: "Arrived",
-                txtStep4: "Complete"
-            },
-            hi: {
-                splashTitle: "किसान दोस्त",
-                splashTagline: "तेज व भरोसेमंद कृषि उपकरण बुकिंग",
-                headerSubtitle: "कृषि यंत्र व आपातकालीन सेवाएं",
-                loginTitle: "किसान लॉगिन / पंजीकरण",
-                loginSubtitle: "निकटतम कृषि उपकरणों के लिए विवरण दर्ज करें",
-                lblMobile: "मोबाइल नंबर",
-                lblDistrict: "जिला",
-                lblMandal: "मंडल / तहसील",
-                btnLogin: "लॉगिन करें और प्रवेश करें",
-                demoNoticeText: "डेमो मोड चालू: बिना OTP के त्वरित प्रवेश की सुविधा।",
-                bannerBadge: "🚨 आपातकालीन फसल कटाई एक्सप्रेस",
-                bannerTitle: "आपातकालीन स्थिति में तुरंत हार्वेस्टर व मशीनें",
-                bannerDesc: "अचानक बारिश या मौसम खराब होने पर 30-45 मिनट में मशीनें प्राप्त करें!",
-                bannerBtn: "आपातकालीन बुकिंग करें",
-                tabMachineriesLabel: "कृषि यंत्र (मशीनें)",
-                tabServicesLabel: "मरम्मत व मिस्त्री सेवाएं",
-                sectionTitleMachineries: "किराए के लिए कृषि उपकरण चुनें",
-                sectionTitleServices: "खेती मिस्त्री व मरम्मत सेवा चुनें",
-                lblSortBy: "क्रमबद्ध करें:",
-                btnBackToGrid: "वापस जाएं",
-                modalBookingHeader: "बुकिंग की पुष्टि करें",
-                modalBookingSubHeader: "खेत व समय का विवरण भरें",
-                lblDate: "कार्य की तारीख",
-                lblTime: "शुरुआती समय",
-                lblDuration: "खेत का क्षेत्रफल / समय",
-                lblLandmark: "खेत का पता व लैंडमार्क",
-                lblEmergencyTag: "क्या फसल कटाई की आपात स्थिति है?",
-                lblEmergencySub: "मशीन तुरंत भेजी जाएगी",
-                lblPaymentMethod: "भुगतान का तरीका चुनें",
-                payCodTitle: "काम के बाद नकद भुगतान (COD)",
-                payCodSub: "ऑपरेटर को सीधे नकद दें",
-                payOnlineTitle: "UPI / ऑनलाइन क्यूआर",
-                payOnlineSub: "फोनपे / गूगल पे द्वारा तुरंत",
-                btnConfirmBooking: "बुकिंग पक्की करें",
-                trackHeader: "मशीन की लाइव ट्रैकिंग",
-                trackSubHeader: "मशीन आपके खेत की ओर आ रही है",
-                btnCallDriver: "ड्राइवर को कॉल करें",
-                btnCancelBooking: "ऑर्डर रद्द करें",
-                reviewsModalTitle: "किसानों की रेटिंग व समीक्षाएं",
-                reviewsModalSub: "स्थानीय किसानों द्वारा सत्यापित प्रतिक्रियाएं",
-                myBookingsTitle: "मेरी बुकिंग इतिहास",
-                txtStep1: "स्वीकृत",
-                txtStep2: "रास्ते में",
-                txtStep3: "पहुंच गए",
-                txtStep4: "पूर्ण"
-            },
-            te: {
-                splashTitle: "కిసాన్ దోస్త్",
-                splashTagline: "వేగవంతమైన & నమ్మకమైన వ్యవసాయ పరికరాల బుకింగ్",
-                headerSubtitle: "యంత్రాలు & అత్యవసర సేవలు",
-                loginTitle: "రైతు లాగిన్ / రిజిస్ట్రేషన్",
-                loginSubtitle: "సమీపంలోని యంత్రాల కోసం మీ వివరాలను నమోదు చేయండి",
-                lblMobile: "మొబైల్ సంఖ్య",
-                lblDistrict: "జిల్లా",
-                lblMandal: "మండలం / తాలూకా",
-                btnLogin: "లాగిన్ అవ్వండి",
-                demoNoticeText: "డెమో మోడ్ ప్రొఫైల్: OTP ల్యాగ్ లేకుండా తక్షణ లాగిన్ సదుపాయం.",
-                bannerBadge: "🚨 అత్యవసర కోత సేవలు",
-                bannerTitle: "అత్యవసర పంట కోత మిషన్ల వేగవంతమైన రవాణా",
-                bannerDesc: "వర్ష సూచన లేదా అత్యవసర సమయంలో 30-45 నిమిషాల్లో హార్వెస్టర్ల సరఫరా!",
-                bannerBtn: "అత్యవసర మిషన్ బుక్ చేయండి",
-                tabMachineriesLabel: "వ్యవసాయ యంత్రాలు",
-                tabServicesLabel: "సేవలు & మెకానిక్స్",
-                sectionTitleMachineries: "అద్దెకు కావలసిన యంత్రాన్ని ఎంచుకోండి",
-                sectionTitleServices: "మరమ్మతు & సాంకేతిక సేవలను ఎంచుకోండి",
-                lblSortBy: "క్రమబద్ధీకరించు:",
-                btnBackToGrid: "వెనుకకు వెళ్ళండి",
-                modalBookingHeader: "బుకింగ్‌ను నిర్ధారించండి",
-                modalBookingSubHeader: "మీ పొలం మరియు సమయ వివరాలు ఇవ్వండి",
-                lblDate: "పని చేయవలసిన తేదీ",
-                lblTime: "ప్రారంభ సమయం",
-                lblDuration: "పొలం విస్తీర్ణం / గంటలు",
-                lblLandmark: "పొలం స్థలం / ల్యాండ్‌మార్క్",
-                lblEmergencyTag: "అత్యవసర పంట కోత పరిస్థితా?",
-                lblEmergencySub: "వెంటనే యంత్రం పంపబడుతుంది",
-                lblPaymentMethod: "చెల్లింపు పద్ధతిని ఎంచుకోండి",
-                payCodTitle: "పని పూర్తయ్యాక నగదు (COD)",
-                payCodSub: "ఆపరేటర్‌కు నేరుగా ఇవ్వండి",
-                payOnlineTitle: "UPI / ఆన్‌లైన్ QR",
-                payOnlineSub: "PhonePe / GPay ద్వారా",
-                btnConfirmBooking: "బుకింగ్ కన్ఫర్మ్ చేయండి",
-                trackHeader: "లైవ్ ట్రాకింగ్",
-                trackSubHeader: "యంత్రం మీ పొలం వైపు వస్తోంది",
-                btnCallDriver: "డ్రైవర్‌కు కాల్ చేయండి",
-                btnCancelBooking: "రద్దు చేయండి",
-                reviewsModalTitle: "రైతుల రేటింగ్‌లు & సమీక్షలు",
-                reviewsModalSub: "స్థానిక రైతుల నిజమైన అభిప్రాయాలు",
-                myBookingsTitle: "నా బుకింగ్‌ల వివరాలు",
-                txtStep1: "కన్ఫర్మ్ అయింది",
-                txtStep2: "వస్తోంది",
-                txtStep3: "చేరింది",
-                txtStep4: "పూర్తయింది"
-            }
-        };
-
-        const machineryCatalog = [
-            { id: 'm1', nameEn: 'Combine Harvester', nameHi: 'कंबाइन हार्वेस्टर', nameTe: 'కంబైన్ హార్వెస్టర్', icon: 'fa-wheat-awn', rate: 2200, unit: 'acre', descEn: 'High capacity paddy & grain harvesting', descHi: 'धान और अनाज कटाई के लिए उच्च क्षमता', descTe: 'వరి మరియు ధాన్యం కోత యంత్రం' },
-            { id: 'm2', nameEn: 'Rice Transplanter', nameHi: 'धान रोपाई मशीन', nameTe: 'వరి నాటు యంత్రం', icon: 'fa-seedling', rate: 1400, unit: 'acre', descEn: 'Automatic 4/6-row paddy seedling transplant', descHi: 'ऑटोमैटिक धान रोपाई मशीन', descTe: 'ఆటోమేటిక్ వరి నాటు వేసే యంత్రం' },
-            { id: 'm3', nameEn: 'Drone Fertilizer Spreader', nameHi: 'ड्रोन उर्वरक छिड़काव', nameTe: 'డ్రోన్ ఎరువుల పిచికారీ', icon: 'fa-crosshairs', rate: 600, unit: 'acre', descEn: 'Precision GPS liquid fertilizer & spray', descHi: 'सटीक स्प्रे ड्रोन तकनीक', descTe: 'ఖచ్చితత్వంతో ఎరువులు స్ప్రే చేసే డ్రోన్' },
-            { id: 'm4', nameEn: 'Heavy Tractor (55 HP)', nameHi: 'ट्रैक्टर (55 एचपी)', nameTe: 'భారీ ట్రాక్టర్ (55 HP)', icon: 'fa-tractor', rate: 900, unit: 'hour', descEn: 'Trolley, puddling & heavy haulage', descHi: 'ट्रॉली व भारी जुताई कार्य', descTe: 'ట్రాలీ మరియు దమ్ము పనులకు' },
-            { id: 'm5', nameEn: 'Rotavator', nameHi: 'रोटावेटर', nameTe: 'రోటవేటర్', icon: 'fa-arrows-spin', rate: 1100, unit: 'hour', descEn: 'Secondary tillage & fine soil preparation', descHi: 'मिट्टी को बारीक करने का उपकरण', descTe: 'నేలను మెత్తగా దున్నే యంత్రం' },
-            { id: 'm6', nameEn: 'Cultivator', nameHi: 'कल्टीवेटर', nameTe: 'కల్టివేటర్', icon: 'fa-gear', rate: 800, unit: 'hour', descEn: '9-tine heavy field cultivator', descHi: '9-फन वाला कल्टीवेटर', descTe: '9 పళ్ళ కల్టివేటర్' },
-            { id: 'm7', nameEn: 'Ploughs (Disc / MB)', nameHi: 'एमबी हल / डिस्क प्लाऊ', nameTe: 'నాగలి (డిస్క్ ప్లౌ)', icon: 'fa-dharmachakra', rate: 950, unit: 'hour', descEn: 'Deep soil turning plough', descHi: 'गहरी जुताई के लिए डिस्क हल', descTe: 'నేలను లోతుగా తవ్వే నాగలి' },
-            { id: 'm8', nameEn: 'Paddy Loader Machine', nameHi: 'पैडी लोडर', nameTe: 'వరి లోడర్ యంత్రం', icon: 'fa-truck-ramp-box', rate: 750, unit: 'hour', descEn: 'Fast grain loading into lorries', descHi: 'अनाज को ट्रकों में तेजी से लोड करने हेतु', descTe: 'ధాన్యం వేగంగా లోడ్ చేసే యంత్రం' },
-            { id: 'm9', nameEn: 'Paddy Cleaning Machine', nameHi: 'धान सफाई मशीन', nameTe: 'వరి శుభ్రపరిచే యంత్రం', icon: 'fa-filter', rate: 500, unit: 'hour', descEn: 'Removes chaff & moisture dust', descHi: 'धान की सफाई व भूसी अलग करने हेतु', descTe: 'వరి ఒట్లు, దుమ్ము శుభ్రం చేసే యంత్రం' },
-            { id: 'm10', nameEn: 'Power Tiller', nameHi: 'पावर टिलर', nameTe: 'పవర్ టిల్లర్', icon: 'fa-gears', rate: 550, unit: 'hour', descEn: 'Compact wet land cultivator', descHi: 'छोटे खेतों और कीचड़ के लिए', descTe: 'చిన్న పొలాలు మరియు దమ్ము పనులకు' },
-            { id: 'm11', nameEn: 'Bund Trimming Machine', nameHi: 'मेढ़ काटने की मशीन', nameTe: 'గట్ల తయారీ యంత్రम', icon: 'fa-scissors', rate: 650, unit: 'hour', descEn: 'Neat field boundary bund shaper', descHi: 'खेत की मेढ़ बनाने की आधुनिक मशीन', descTe: 'పొలం గట్లు సమానంగా చేసే యంత్రం' }
-        ];
-
-        const serviceCatalog = [
-            { id: 's1', nameEn: 'Tractor Services & Haulage', nameHi: 'ट्रैक्टर ढुलाई सेवा', nameTe: 'ట్రాక్టర్ రవాణా సేవలు', icon: 'fa-truck-moving', rate: 700, unit: 'trip', descEn: 'Crop transport to Mandi & Godown', descHi: 'फसल को मंडी तक पहुंचाने हेतु', descTe: 'పంటను మార్కెట్‌కు రవాణా చేయుటకు' },
-            { id: 's2', nameEn: 'Machinery Repair Mechanic', nameHi: 'मशीनरी मरम्मत मैकेनिक', nameTe: 'యంత్రాల మరమ్మతు మెకానిక్', icon: 'fa-wrench', rate: 450, unit: 'visit', descEn: 'On-field engine breakdown fix', descHi: 'खेत पर आकर इंजन ठीक करने वाले', descTe: 'పొలం వద్దకే వచ్చి యంత్రాలు బాగుచేయువారు' },
-            { id: 's3', nameEn: 'Electrician (Motor & Panel)', nameHi: 'इलेक्ट्रिशियन (मोटर व पैनल)', nameTe: 'ఎలక్ట్రీషియన్ (మోటార్ & ప్యానెల్)', icon: 'fa-bolt', rate: 350, unit: 'visit', descEn: 'Starter panel, capacitor & wiring fix', descHi: 'स्टार्टर बॉक्स व वायरिंग विशेषज्ञ', descTe: 'స్టార్టర్ బాక్స్ & వైరింగ్ నిపుణులు' },
-            { id: 's4', nameEn: 'Motor & Pump Mechanic', nameHi: 'मोटर व पंप मैकेनिक', nameTe: 'మోటార్ & పంప్ మెకానిక్', icon: 'fa-faucet-drip', rate: 400, unit: 'visit', descEn: 'Submersible & monoblock pump fix', descHi: 'सबमर्सिबल व पंप सेट मरम्मत', descTe: 'సబ్‌మెర్సిబుల్ మోటార్ల మరమ్మతు' },
-            { id: 's5', nameEn: 'Borewell Mechanic & Flushing', nameHi: 'बोरवेल मैकेनिक', nameTe: 'బోరుబావి మెకానిక్', icon: 'fa-water', rate: 1200, unit: 'service', descEn: 'Piping replacement & blockage clearing', descHi: 'बोरवेल पाइप व सफाई विशेषज्ञ', descTe: 'బోరుబావి పైపులు & క్లీనింగ్ సేవలు' },
-            { id: 's6', nameEn: 'Professional Operators / Drivers', nameHi: 'अनुभवी ड्राइवर व ऑपरेटर', nameTe: 'నైపుణ్యం కలిగిన డ్రైవర్లు', icon: 'fa-user-gear', rate: 600, unit: 'day', descEn: 'Skilled harvester & tractor drivers', descHi: 'कुशल हार्वेस्टर व ट्रैक्टर चालक', descTe: 'హార్వెస్టర్ మరియు ట్రాక్టర్ డ్రైవర్లు' }
-        ];
-
-        /* MOCK PROVIDERS GENERATOR */
-        function getMockProvidersForItem(item) {
-            const mandal = state.user.mandal || 'Geesugonda';
-            const district = state.user.district || 'Warangal';
-
-            return [
-                {
-                    id: 'prov_1',
-                    name: 'Srinivas Rao',
-                    phone: '9848012345',
-                    regNo: 'TS 03 FE 4821',
-                    rating: 4.9,
-                    reviewsCount: 84,
-                    distance: '1.2 km away',
-                    mandal: mandal,
-                    district: district,
-                    machineModel: 'John Deere 5050D (2024 Model)',
-                    urgentAvailable: true,
-                    rate: item.rate,
-                    unit: item.unit,
-                    reviews: [
-                        { name: 'Ramesh Reddy', rating: 5, text: 'Arrived within 20 mins during heavy rain threat. Clean work!' },
-                        { name: 'K. Venkatesh', rating: 5, text: 'Very polite operator, fair charges without overcharging.' }
-                    ]
-                },
-                {
-                    id: 'prov_2',
-                    name: 'Mahesh Kumar (Kisan Agro)',
-                    phone: '9440198765',
-                    regNo: 'TS 03 H 9012',
-                    rating: 4.8,
-                    reviewsCount: 112,
-                    distance: '2.8 km away',
-                    mandal: mandal,
-                    district: district,
-                    machineModel: 'Kubota DC-68G Combine',
-                    urgentAvailable: true,
-                    rate: item.rate - 50,
-                    unit: item.unit,
-                    reviews: [
-                        { name: 'S. Patel', rating: 5, text: 'Excellent machine condition, fuel efficient.' }
-                    ]
-                },
-                {
-                    id: 'prov_3',
-                    name: 'Gurpreet Singh',
-                    phone: '9814054321',
-                    regNo: 'PB 10 CT 7744',
-                    rating: 4.7,
-                    reviewsCount: 46,
-                    distance: '4.5 km away',
-                    mandal: mandal,
-                    district: district,
-                    machineModel: 'Swaraj 855 FE Turbo',
-                    urgentAvailable: false,
-                    rate: item.rate + 100,
-                    unit: item.unit,
-                    reviews: [
-                        { name: 'Laxman Farmer', rating: 4, text: 'Good operator, highly experienced.' }
-                    ]
-                }
-            ];
-        }
-
-        function playAudioTone(type) {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-
-                if (type === 'click') {
-                    osc.frequency.setValueAtTime(400, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.08);
-                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.08);
-                } else if (type === 'success') {
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); // G5
-                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
-                }
-            } catch (e) {
-                // Audio context optional
-            }
-        }
-
-        function initSplashCanvas() {
-            const canvas = document.getElementById('particleCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-
-            const particles = [];
-            for (let i = 0; i < 40; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 3 + 1,
-                    vx: (Math.random() - 0.5) * 0.8,
-                    vy: (Math.random() - 0.5) * 0.8,
-                    color: Math.random() > 0.5 ? '#52B788' : '#E9C46A'
-                });
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color;
-                    ctx.globalAlpha = 0.6;
-                    ctx.fill();
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
-
-        function skipSplash() {
-            playAudioTone('click');
-            const splash = document.getElementById('splashScreen');
-            splash.classList.add('opacity-0');
+        window.onload = function() {
+            // Hide splash screen after delay
             setTimeout(() => {
-                splash.classList.add('hidden');
-            }, 700);
-        }
+                const splash = document.getElementById('splashScreen');
+                splash.classList.add('opacity-0');
+                setTimeout(() => {
+                    splash.classList.add('hidden');
+                    document.getElementById('mainHeader').classList.remove('hidden');
+                    document.getElementById('loginSection').classList.remove('hidden');
+                    populateDistrictsDropdown();
+                }, 700);
+            }, 1200);
 
-        function handleLogin(e) {
-            e.preventDefault();
-            playAudioTone('success');
-
-            const mobile = document.getElementById('mobileInput').value;
-            const district = document.getElementById('districtInput').value;
-            const mandal = document.getElementById('mandalInput').value;
-
-            state.user = { mobile, district, mandal };
-
-            // Show custom alert modal
-            showCustomAlert('Registration Completed Successfully!', `Welcome to Kisan Dost network! Located in ${mandal}, ${district}.`, () => {
-                // Transition to main view
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('mainDashboard').classList.remove('hidden');
-                document.getElementById('userLocationBadge').classList.remove('hidden');
-                document.getElementById('bookingsNavBtn').classList.remove('hidden');
-                document.getElementById('userLocationText').innerText = `${mandal}, ${district}`;
-
-                // Set default date in booking modal
+            // Set today's date in booking date input
+            const dateInput = document.getElementById('bookingDate');
+            if(dateInput) {
                 const today = new Date().toISOString().split('T')[0];
-                document.getElementById('bookingDate').value = today;
+                dateInput.value = today;
+            }
+        };
 
-                renderCatalog();
+        function populateDistrictsDropdown() {
+            const districtSelect = document.getElementById('districtSelect');
+            districtSelect.innerHTML = '<option value="">-- Select Telangana District --</option>';
+            
+            const districts = Object.keys(telanganaData);
+            districts.forEach((dist, index) => {
+                const opt = document.createElement('option');
+                opt.value = dist;
+                opt.textContent = `${index + 1}. ${dist}`;
+                districtSelect.appendChild(opt);
             });
         }
 
-        function showCustomAlert(title, message, callback) {
-            document.getElementById('alertTitle').innerText = title;
-            document.getElementById('alertMessage').innerText = message;
-            const modal = document.getElementById('customAlertModal');
-            modal.classList.remove('hidden');
-            window._alertCallback = callback;
+        function handleDistrictChange() {
+            const districtSelect = document.getElementById('districtSelect');
+            const mandalSelect = document.getElementById('mandalSelect');
+            const selectedDist = districtSelect.value;
+
+            mandalSelect.innerHTML = '<option value="">-- Choose Mandal --</option>';
+
+            if (!selectedDist || !telanganaData[selectedDist]) {
+                mandalSelect.disabled = true;
+                mandalSelect.classList.add('bg-slate-100', 'cursor-not-allowed');
+                return;
+            }
+
+            const mandals = telanganaData[selectedDist];
+            mandals.forEach(mandal => {
+                const opt = document.createElement('option');
+                opt.value = mandal;
+                opt.textContent = mandal;
+                mandalSelect.appendChild(opt);
+            });
+
+            mandalSelect.disabled = false;
+            mandalSelect.classList.remove('bg-slate-100', 'cursor-not-allowed');
         }
 
-        function closeCustomAlert() {
-            playAudioTone('click');
-            document.getElementById('customAlertModal').classList.add('hidden');
-            if (window._alertCallback) {
-                window._alertCallback();
-                window._alertCallback = null;
+        // Strict 10-Digit Mobile Number Validation
+        function validateMobileInput(input) {
+            // Remove non-numeric digits
+            input.value = input.value.replace(/[^0-9]/g, '');
+            const errElem = document.getElementById('mobileError');
+            if (input.value.length > 0 && input.value.length < 10) {
+                errElem.classList.remove('hidden');
+            } else {
+                errElem.classList.add('hidden');
             }
         }
 
-        function changeLanguage(langKey) {
-            playAudioTone('click');
-            state.lang = langKey;
-            const dict = i18n[langKey] || i18n.en;
+        // Handle Login Submission
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const mobileInput = document.getElementById('mobileInput').value.trim();
+            const districtSelect = document.getElementById('districtSelect').value;
+            const mandalSelect = document.getElementById('mandalSelect').value;
+            const errElem = document.getElementById('mobileError');
 
-            // Translate elements by ID
-            Object.keys(dict).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (el.tagName === 'INPUT' && el.type === 'text') {
-                        el.placeholder = dict[id];
-                    } else {
-                        el.innerText = dict[id];
-                    }
+            if (!/^[0-9]{10}$/.test(mobileInput)) {
+                errElem.classList.remove('hidden');
+                return;
+            } else {
+                errElem.classList.add('hidden');
+            }
+
+            if (!districtSelect || !mandalSelect) {
+                alert('Please select both your Telangana District and Mandal to proceed.');
+                return;
+            }
+
+            // Save user state
+            state.user.mobile = mobileInput;
+            state.user.district = districtSelect;
+            state.user.mandal = mandalSelect;
+            state.user.isLoggedIn = true;
+
+            // Update user settings info
+            document.getElementById('settingUserPhone').innerText = '+91 ' + mobileInput;
+            document.getElementById('settingUserDistrict').innerText = districtSelect;
+            document.getElementById('settingUserMandal').innerText = mandalSelect;
+            document.getElementById('navUserBadge').innerText = districtSelect;
+
+            // Show welcome modal summary
+            document.getElementById('welcPhone').innerText = '+91 ' + mobileInput;
+            document.getElementById('welcDistrict').innerText = districtSelect;
+            document.getElementById('welcMandal').innerText = mandalSelect;
+            document.getElementById('welcomeModal').classList.remove('hidden');
+        }
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').classList.add('hidden');
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            selectMainCategory('machineries'); // default to machineries
+            renderPastBookings();
+            renderUserReviews();
+        }
+
+        function changeLanguage(lang) {
+            state.currentLang = lang;
+            const dict = i18n[lang] || i18n.en;
+
+            // Update text elements
+            for (let key in dict) {
+                const elem = document.getElementById(key);
+                if (elem) {
+                    elem.innerText = dict[key];
                 }
-            });
+            }
 
-            // Re-render grid cards to update localized names
-            renderCatalog();
+            // Re-render items grid if visible
+            if (state.user.isLoggedIn) {
+                renderItemsGrid();
+            }
         }
 
-        function getLocalizedName(item) {
-            if (state.lang === 'hi') return item.nameHi || item.nameEn;
-            if (state.lang === 'te') return item.nameTe || item.nameEn;
-            return item.nameEn;
+        function resetToHome() {
+            if (state.user.isLoggedIn) {
+                selectMainCategory('machineries');
+            }
         }
 
-        function getLocalizedDesc(item) {
-            if (state.lang === 'hi') return item.descHi || item.descEn;
-            if (state.lang === 'te') return item.descTe || item.descEn;
-            return item.descEn;
-        }
-
-        function switchCategoryTab(cat) {
-            playAudioTone('click');
-            state.currentCategory = cat;
-
-            const btnM = document.getElementById('tabMachineriesBtn');
-            const btnS = document.getElementById('tabServicesBtn');
-            const viewM = document.getElementById('machineriesView');
-            const viewS = document.getElementById('servicesView');
-
-            hideProvidersPanel();
+        function selectMainCategory(cat) {
+            state.activeCategory = cat;
+            
+            const cardMach = document.getElementById('cardMachineries');
+            const cardServ = document.getElementById('cardServices');
 
             if (cat === 'machineries') {
-                btnM.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition shadow-sm bg-leafGreen text-white";
-                btnS.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition text-gray-600 hover:bg-gray-100";
-                viewM.classList.remove('hidden');
-                viewS.classList.add('hidden');
+                cardMach.classList.add('border-kisan-medium', 'ring-2', 'ring-kisan-medium/30');
+                cardServ.classList.remove('border-kisan-medium', 'ring-2', 'ring-kisan-medium/30');
             } else {
-                btnS.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition shadow-sm bg-leafGreen text-white";
-                btnM.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition text-gray-600 hover:bg-gray-100";
-                viewS.classList.remove('hidden');
-                viewM.classList.add('hidden');
+                cardServ.classList.add('border-kisan-medium', 'ring-2', 'ring-kisan-medium/30');
+                cardMach.classList.remove('border-kisan-medium', 'ring-2', 'ring-kisan-medium/30');
             }
 
-            renderCatalog();
+            renderItemsGrid();
         }
 
-        function renderCatalog() {
-            const gridM = document.getElementById('machineryCardsGrid');
-            const gridS = document.getElementById('serviceCardsGrid');
+        function toggleEmergencyFilter() {
+            const isChecked = document.getElementById('emergencyToggle').checked;
+            state.emergencyOnly = isChecked;
+            renderItemsGrid();
+        }
 
-            if (state.currentCategory === 'machineries') {
-                gridM.innerHTML = machineryCatalog.map(item => `
-                    <div onclick="selectItemFromCatalog('${item.id}', 'machinery')" class="bg-white rounded-2xl border border-gray-200/80 p-3.5 sm:p-4 hover:border-leafGreen hover:shadow-lg transition cursor-pointer flex flex-col justify-between group">
+        function renderItemsGrid() {
+            const grid = document.getElementById('itemsGrid');
+            grid.innerHTML = '';
+
+            let list = catalog[state.activeCategory] || [];
+
+            if (state.emergencyOnly) {
+                list = list.filter(item => item.emergencyReady);
+            }
+
+            if (list.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-8 text-slate-400">
+                        <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
+                        <p class="text-xs font-semibold">No emergency items match current filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.forEach(item => {
+                const title = state.currentLang === 'hi' ? item.titleHi : (state.currentLang === 'te' ? item.titleTe : item.titleEn);
+                
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 rounded-2xl p-4 border border-slate-200 hover:border-kisan-accent hover:bg-white hover:shadow-md transition cursor-pointer flex flex-col justify-between group";
+                card.onclick = () => openOperatorsFor(item);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-3xl group-hover:scale-110 transition transform">${item.icon}</span>
+                            ${item.emergencyReady ? '<span class="bg-red-100 text-red-700 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase">⚡ 30-Min Fast</span>' : '<span class="bg-emerald-100 text-emerald-800 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase">Verified</span>'}
+                        </div>
+                        <h4 class="font-extrabold text-slate-800 text-base group-hover:text-kisan-medium transition">${title}</h4>
+                        <p class="text-[11px] text-slate-500 line-clamp-2 mt-1">${item.descEn}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between">
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-mintLight text-leafGreen flex items-center justify-center text-2xl mb-3 group-hover:scale-110 group-hover:bg-leafGreen group-hover:text-white transition">
-                                <i class="fa-solid ${item.icon}"></i>
-                            </div>
-                            <h4 class="font-extrabold text-sm sm:text-base text-gray-800 leading-snug mb-1 group-hover:text-leafGreen transition">
-                                ${getLocalizedName(item)}
-                            </h4>
-                            <p class="text-[11px] text-gray-500 line-clamp-2 mb-3">
-                                ${getLocalizedDesc(item)}
-                            </p>
+                            <span class="text-[10px] text-slate-400 block font-semibold">Starts from</span>
+                            <span class="text-sm font-black text-kisan-dark">₹${item.price}/${item.unit}</span>
                         </div>
-                        <div class="pt-2 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-xs font-bold text-emeraldDeep">₹${item.rate}/${item.unit}</span>
-                            <span class="text-[10px] font-bold text-leafGreen bg-mintLight px-2 py-0.5 rounded-full flex items-center">
-                                <i class="fa-solid fa-bolt text-warmGold mr-1 text-[9px]"></i> Urgent Available
-                            </span>
-                        </div>
+                        <button class="px-3 py-1.5 bg-kisan-medium hover:bg-kisan-dark text-white rounded-xl text-xs font-bold shadow flex items-center gap-1">
+                            <span>Find Nearby</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
                     </div>
-                `).join('');
-            } else {
-                gridS.innerHTML = serviceCatalog.map(item => `
-                    <div onclick="selectItemFromCatalog('${item.id}', 'service')" class="bg-white rounded-2xl border border-gray-200/80 p-4 hover:border-leafGreen hover:shadow-lg transition cursor-pointer flex items-center space-x-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-mintLight text-leafGreen flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 group-hover:bg-leafGreen group-hover:text-white transition">
-                            <i class="fa-solid ${item.icon}"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="font-extrabold text-sm sm:text-base text-gray-800 group-hover:text-leafGreen transition">
-                                ${getLocalizedName(item)}
-                            </h4>
-                            <p class="text-xs text-gray-500 mb-1">
-                                ${getLocalizedDesc(item)}
-                            </p>
-                            <div class="flex items-center space-x-3 text-xs">
-                                <span class="font-bold text-emeraldDeep">₹${item.rate}/${item.unit}</span>
-                                <span class="text-gray-400">•</span>
-                                <span class="text-amber-600 font-semibold text-[11px]"><i class="fa-solid fa-clock mr-0.5"></i> ~20 mins arrival</span>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function filterItems() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const sortBy = document.getElementById('sortBySelect').value;
-
-            let source = state.currentCategory === 'machineries' ? [...machineryCatalog] : [...serviceCatalog];
-
-            if (query) {
-                source = source.filter(item => 
-                    getLocalizedName(item).toLowerCase().includes(query) ||
-                    getLocalizedDesc(item).toLowerCase().includes(query)
-                );
-            }
-
-            if (sortBy === 'price') {
-                source.sort((a, b) => a.rate - b.rate);
-            }
-
-            // Temporarily replace dataset for rendering
-            if (state.currentCategory === 'machineries') {
-                const gridM = document.getElementById('machineryCardsGrid');
-                gridM.innerHTML = source.map(item => `
-                    <div onclick="selectItemFromCatalog('${item.id}', 'machinery')" class="bg-white rounded-2xl border border-gray-200/80 p-3.5 sm:p-4 hover:border-leafGreen hover:shadow-lg transition cursor-pointer flex flex-col justify-between group">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-mintLight text-leafGreen flex items-center justify-center text-2xl mb-3 group-hover:scale-110 group-hover:bg-leafGreen group-hover:text-white transition">
-                                <i class="fa-solid ${item.icon}"></i>
-                            </div>
-                            <h4 class="font-extrabold text-sm sm:text-base text-gray-800 leading-snug mb-1 group-hover:text-leafGreen transition">
-                                ${getLocalizedName(item)}
-                            </h4>
-                            <p class="text-[11px] text-gray-500 line-clamp-2 mb-3">
-                                ${getLocalizedDesc(item)}
-                            </p>
-                        </div>
-                        <div class="pt-2 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-xs font-bold text-emeraldDeep">₹${item.rate}/${item.unit}</span>
-                            <span class="text-[10px] font-bold text-leafGreen bg-mintLight px-2 py-0.5 rounded-full flex items-center">
-                                <i class="fa-solid fa-bolt text-warmGold mr-1 text-[9px]"></i> Urgent Available
-                            </span>
-                        </div>
-                    </div>
-                `).join('');
-            }
+        function filterItemsList() {
+            const query = document.getElementById('itemSearchInput').value.toLowerCase();
+            const cards = document.getElementById('itemsGrid').children;
+            Array.from(cards).forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
         }
 
-        function selectItemFromCatalog(id, type) {
-            playAudioTone('click');
-            const list = type === 'machinery' ? machineryCatalog : serviceCatalog;
-            state.selectedItem = list.find(x => x.id === id);
-
-            document.getElementById('selectedItemTitle').innerText = getLocalizedName(state.selectedItem);
-            document.getElementById('selectedItemSubtitle').innerText = `Available nearby providers in ${state.user.mandal || 'Geesugonda'}`;
-
-            renderProvidersList();
-
-            document.getElementById('machineriesView').classList.add('hidden');
-            document.getElementById('servicesView').classList.add('hidden');
-            document.getElementById('providersPanel').classList.remove('hidden');
+        function openOperatorsFor(item) {
+            state.selectedItem = item;
+            const title = state.currentLang === 'hi' ? item.titleHi : (state.currentLang === 'te' ? item.titleTe : item.titleEn);
+            document.getElementById('operatorModalItemName').innerText = title;
+            document.getElementById('operatorModalTitle').innerText = `Available Operators for ${title}`;
+            
+            renderOperatorsList();
+            document.getElementById('operatorsModal').classList.remove('hidden');
         }
 
-        function hideProvidersPanel() {
-            playAudioTone('click');
-            document.getElementById('providersPanel').classList.add('hidden');
-            if (state.currentCategory === 'machineries') {
-                document.getElementById('machineriesView').classList.remove('hidden');
-            } else {
-                document.getElementById('servicesView').classList.remove('hidden');
-            }
+        function closeOperatorsModal() {
+            document.getElementById('operatorsModal').classList.add('hidden');
         }
 
-        function renderProvidersList() {
-            const container = document.getElementById('providersListContainer');
-            const providers = getMockProvidersForItem(state.selectedItem);
+        function renderOperatorsList(sortBy = 'distance') {
+            const container = document.getElementById('operatorsList');
+            container.innerHTML = '';
 
-            container.innerHTML = providers.map(p => `
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white hover:shadow-md transition">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-12 h-12 rounded-full bg-emeraldDeep text-warmGold font-extrabold text-lg flex items-center justify-center shrink-0 border-2 border-limeAccent shadow-sm">
-                            ${p.name.charAt(0)}
+            let ops = [...operatorsDatabase];
+
+            // Adjust base prices according to selected item
+            const basePrice = state.selectedItem ? state.selectedItem.price : 1800;
+
+            if (sortBy === 'distance') ops.sort((a,b) => a.dist - b.dist);
+            if (sortBy === 'rating') ops.sort((a,b) => b.rating - a.rating);
+            if (sortBy === 'price') ops.sort((a,b) => a.price - b.price);
+
+            ops.forEach(op => {
+                const opCard = document.createElement('div');
+                opCard.className = "bg-slate-50 rounded-2xl p-4 border border-slate-200 hover:border-kisan-medium hover:bg-white transition flex flex-col md:flex-row items-start md:items-center justify-between gap-4";
+                
+                opCard.innerHTML = `
+                    <div class="flex items-start gap-3.5">
+                        <div class="w-12 h-12 rounded-2xl bg-kisan-medium text-white flex items-center justify-center font-bold text-lg shadow flex-shrink-0">
+                            ${op.name.charAt(0)}
                         </div>
                         <div>
-                            <div class="flex items-center space-x-2">
-                                <h5 class="font-extrabold text-sm sm:text-base text-gray-800">${p.name}</h5>
-                                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center">
-                                    <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> GPS Verified
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-bold text-slate-800 text-base">${op.name}</h4>
+                                ${op.verified ? '<span class="text-blue-500 text-xs" title="Verified"><i class="fa-solid fa-circle-check"></i></span>' : ''}
+                                ${op.emergency ? '<span class="bg-red-100 text-red-700 text-[9px] font-extrabold px-2 py-0.5 rounded">30-Min Ready</span>' : ''}
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium mt-0.5">${op.exp}</p>
+                            <div class="flex items-center gap-3 mt-2 text-xs">
+                                <span class="bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                                    ⭐ ${op.rating} (${op.reviews} reviews)
+                                </span>
+                                <span class="text-slate-600 font-bold flex items-center gap-1">
+                                    📍 ${op.dist} km from your Mandal (${state.user.mandal || 'Local'})
                                 </span>
                             </div>
-                            <p class="text-xs text-gray-600 mt-0.5">${p.machineModel} • <span class="font-bold text-emeraldDeep">${p.regNo}</span></p>
-                            
-                            <div class="flex items-center space-x-3 text-xs mt-2">
-                                <span class="text-amber-500 font-bold flex items-center">
-                                    ★ ${p.rating} <span class="text-gray-400 font-normal ml-1">(${p.reviewsCount} jobs)</span>
-                                </span>
-                                <span class="text-gray-300">•</span>
-                                <span class="text-gray-600 font-semibold"><i class="fa-solid fa-location-arrow text-leafGreen mr-1"></i>${p.distance}</span>
-                            </div>
                         </div>
                     </div>
 
-                    <div class="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-gray-200">
-                        <div class="text-left sm:text-right mb-0 sm:mb-2">
-                            <span class="text-lg font-extrabold text-emeraldDeep">₹${p.rate}</span>
-                            <span class="text-xs text-gray-500">/${p.unit}</span>
+                    <div class="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-slate-200 gap-3">
+                        <div class="text-left md:text-right">
+                            <span class="text-[10px] text-slate-400 font-semibold block">Rate</span>
+                            <span class="text-lg font-black text-kisan-dark">₹${basePrice} / ${state.selectedItem ? state.selectedItem.unit : 'hr'}</span>
                         </div>
-
-                        <div class="flex items-center space-x-2">
-                            <button onclick="openReviewsModal('${p.name}', '${encodeURIComponent(JSON.stringify(p.reviews))}')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl text-xs transition">
-                                Reviews
+                        <div class="flex items-center gap-2">
+                            <button onclick="triggerSimulatedCall('${op.name}', '${op.phone}')" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                                <i class="fa-solid fa-phone"></i>
+                                <span class="hidden sm:inline">Call</span>
                             </button>
-                            <button onclick="openBookingModal('${p.id}')" class="px-4 py-2 bg-leafGreen hover:bg-emeraldDeep text-white font-bold rounded-xl text-xs shadow transition flex items-center space-x-1">
+                            <button onclick="openBookingDialog('${op.id}')" class="px-4 py-2 bg-kisan-medium hover:bg-kisan-dark text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1">
                                 <span>Book Now</span>
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+                container.appendChild(opCard);
+            });
         }
 
-        function openBookingModal(providerId) {
-            playAudioTone('click');
-            const providers = getMockProvidersForItem(state.selectedItem);
-            state.selectedProvider = providers.find(p => p.id === providerId);
+        function sortOperators(criteria) {
+            renderOperatorsList(criteria);
+        }
 
-            // Populate summary card
-            const summary = document.getElementById('bookingSummaryCard');
-            summary.innerHTML = `
-                <div class="w-12 h-12 rounded-xl bg-leafGreen text-warmGold flex items-center justify-center text-xl shrink-0">
-                    <i class="fa-solid ${state.selectedItem.icon}"></i>
+        function openBookingDialog(opId) {
+            const op = operatorsDatabase.find(o => o.id === opId);
+            state.selectedOperator = op;
+
+            const summaryBox = document.getElementById('bookingOperatorSummary');
+            summaryBox.innerHTML = `
+                <div class="w-10 h-10 rounded-xl bg-kisan-medium text-white flex items-center justify-center font-bold text-base flex-shrink-0">
+                    ${op.name.charAt(0)}
                 </div>
-                <div class="flex-grow">
-                    <h5 class="font-extrabold text-sm text-emeraldDeep">${getLocalizedName(state.selectedItem)}</h5>
-                    <p class="text-xs text-gray-600">${state.selectedProvider.name} (${state.selectedProvider.machineModel})</p>
-                    <p class="text-xs font-bold text-leafGreen">Rate: ₹${state.selectedProvider.rate}/${state.selectedProvider.unit}</p>
+                <div>
+                    <h4 class="font-bold text-slate-800 text-sm">${op.name} (${state.selectedItem ? state.selectedItem.titleEn : 'Equipment'})</h4>
+                    <p class="text-xs text-slate-500">Rate: ₹${state.selectedItem.price}/${state.selectedItem.unit} • Distance: ${op.dist} km</p>
                 </div>
             `;
 
+            updateEstimatedCost();
+            closeOperatorsModal();
             document.getElementById('bookingModal').classList.remove('hidden');
+
+            document.getElementById('bookingQuantity').addEventListener('input', updateEstimatedCost);
+        }
+
+        function updateEstimatedCost() {
+            const qty = parseInt(document.getElementById('bookingQuantity').value) || 1;
+            const unitPrice = state.selectedItem ? state.selectedItem.price : 1800;
+            const total = qty * unitPrice;
+            document.getElementById('bookingEstimatedCost').innerText = `₹${total.toLocaleString('en-IN')}`;
         }
 
         function closeBookingModal() {
-            playAudioTone('click');
             document.getElementById('bookingModal').classList.add('hidden');
         }
 
-        function togglePaymentView(mode) {
-            playAudioTone('click');
-            const qrBox = document.getElementById('qrSimulationBox');
-            const codCard = document.getElementById('paymentCodCard');
-            const onlineCard = document.getElementById('paymentOnlineCard');
-
-            if (mode === 'ONLINE') {
-                qrBox.classList.remove('hidden');
-                onlineCard.className = "border-2 border-leafGreen bg-mintLight/30 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:bg-mintLight transition text-center";
-                codCard.className = "border-2 border-gray-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition text-center";
-                
-                // Simulate QR Scan success after 2 seconds
-                setTimeout(() => {
-                    const overlay = document.getElementById('qrSuccessOverlay');
-                    if (overlay) overlay.classList.remove('hidden');
-                }, 2000);
-            } else {
-                qrBox.classList.add('hidden');
-                codCard.className = "border-2 border-leafGreen bg-mintLight/30 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:bg-mintLight transition text-center";
-                onlineCard.className = "border-2 border-gray-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition text-center";
-            }
-        }
-
-        function submitBooking(e) {
+        function handleBookingSubmit(e) {
             e.preventDefault();
-            playAudioTone('success');
-
-            const date = document.getElementById('bookingDate').value;
-            const time = document.getElementById('bookingTime').value;
-            const duration = document.getElementById('bookingDuration').value;
+            const qty = parseInt(document.getElementById('bookingQuantity').value) || 1;
+            const dateVal = document.getElementById('bookingDate').value;
             const landmark = document.getElementById('bookingLandmark').value;
-            const isEmergency = document.getElementById('emergencyCheckbox').checked;
-            const paymentMode = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const unitPrice = state.selectedItem ? state.selectedItem.price : 1800;
+            const totalCost = qty * unitPrice;
 
             const newBooking = {
-                id: 'BK_' + Math.floor(100000 + Math.random() * 900000),
-                item: state.selectedItem,
-                provider: state.selectedProvider,
-                date,
-                time,
-                duration,
-                landmark,
-                isEmergency,
-                paymentMode,
-                status: 'Confirmed',
-                etaMinutes: isEmergency ? 15 : 25,
-                progressStep: 2 // 1: Confirmed, 2: En Route, 3: Arrived, 4: Complete
+                id: 'BK-' + Math.floor(1000 + Math.random() * 9000),
+                item: state.selectedItem ? state.selectedItem.titleEn : 'Equipment',
+                operator: state.selectedOperator ? state.selectedOperator.name : 'Operator',
+                phone: state.selectedOperator ? state.selectedOperator.phone : '+91 98480 00000',
+                date: dateVal,
+                status: 'En Route',
+                cost: totalCost,
+                acres: qty
             };
 
-            state.bookings.unshift(newBooking);
-            state.activeTrackingBooking = newBooking;
-
-            // Update bookings badge counter
-            document.getElementById('bookingBadgeCount').innerText = state.bookings.length;
+            state.bookingsHistory.unshift(newBooking);
+            renderPastBookings();
 
             closeBookingModal();
             openLiveTrackingModal(newBooking);
         }
 
-        function openLiveTrackingModal(booking) {
-            playAudioTone('click');
-            state.activeTrackingBooking = booking;
+        let trackingAnimId = null;
+        let tractorProgress = 0.0;
 
-            // Render Driver info card
-            const card = document.getElementById('liveDriverCard');
-            card.innerHTML = `
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-2xl bg-leafGreen text-warmGold flex items-center justify-center text-xl font-bold shadow">
+        function openLiveTrackingModal(booking) {
+            document.getElementById('trackingModal').classList.remove('hidden');
+
+            // Render operator card inside tracking
+            const detailsBox = document.getElementById('trackingOperatorDetails');
+            detailsBox.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-tractor"></i>
                     </div>
                     <div>
-                        <h5 class="font-extrabold text-sm sm:text-base text-gray-800">${booking.provider.name}</h5>
-                        <p class="text-xs text-gray-600 font-semibold">${booking.provider.machineModel} (${booking.provider.regNo})</p>
-                        <p class="text-[11px] text-emerald-700 font-bold mt-0.5">
-                            <i class="fa-solid fa-shield-halved mr-1"></i> Verified Operator • ${booking.paymentMode} Payment
-                        </p>
+                        <h4 class="font-bold text-slate-800 text-sm">${booking.operator}</h4>
+                        <p class="text-xs text-slate-500">${booking.item} • ${booking.phone}</p>
                     </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded uppercase block">EN ROUTE</span>
+                    <span class="text-xs font-bold text-slate-700">Booking ID: ${booking.id}</span>
                 </div>
             `;
 
-            document.getElementById('liveTrackingModal').classList.remove('hidden');
-            startTrackingMapAnimation();
+            initTrackingCanvas();
         }
 
         function closeTrackingModal() {
-            playAudioTone('click');
-            document.getElementById('liveTrackingModal').classList.add('hidden');
-            if (state.animationFrameId) {
-                cancelAnimationFrame(state.animationFrameId);
-            }
+            document.getElementById('trackingModal').classList.add('hidden');
+            if (trackingAnimId) cancelAnimationFrame(trackingAnimId);
         }
 
-        /* Interactive Canvas Animated Map showing Tractor moving towards Farmer's Field */
-        function startTrackingMapAnimation() {
-            const canvas = document.getElementById('trackingMapCanvas');
-            if (!canvas) return;
+        function recenterMap() {
+            tractorProgress = 0.2;
+        }
+
+        function initTrackingCanvas() {
+            const canvas = document.getElementById('liveMapCanvas');
             const ctx = canvas.getContext('2d');
 
-            function resize() {
+            function resizeCanvas() {
                 canvas.width = canvas.parentElement.clientWidth;
                 canvas.height = canvas.parentElement.clientHeight;
             }
-            resize();
+            resizeCanvas();
 
-            let progress = 0; // 0 to 1 along path
+            tractorProgress = 0.1;
 
-            function renderMap() {
+            function animateMap() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                // Draw Field Background Grid
-                ctx.fillStyle = '#1b4332';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                const w = canvas.width;
+                const h = canvas.height;
 
-                // Draw Crop Fields Pattern
-                ctx.fillStyle = '#2d6a4f';
-                for (let x = 20; x < canvas.width; x += 120) {
-                    for (let y = 20; y < canvas.height; y += 80) {
-                        ctx.beginPath();
-                        ctx.roundRect(x, y, 90, 50, 8);
-                        ctx.fill();
-                    }
+                // 1. Draw Field Farmland Background Grid
+                ctx.fillStyle = '#1b4332';
+                ctx.fillRect(0, 0, w, h);
+
+                // Grid pattern for agricultural plots
+                ctx.strokeStyle = '#2d6a4f';
+                ctx.lineWidth = 1;
+                const gridSize = 40;
+                for(let x=0; x<w; x+=gridSize) {
+                    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
+                }
+                for(let y=0; y<h; y+=gridSize) {
+                    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
                 }
 
-                // Draw Road Path (S-Curve)
-                ctx.beginPath();
-                ctx.strokeStyle = '#e9c46a';
-                ctx.lineWidth = 14;
-                ctx.lineCap = 'round';
-                
-                const startX = 60;
-                const startY = canvas.height - 50;
-                const endX = canvas.width - 80;
-                const endY = 60;
+                // 2. Draw Winding Dirt Field Road Path
+                const startX = w * 0.15;
+                const startY = h * 0.8;
+                const endX = w * 0.82;
+                const endY = h * 0.25;
+                const cp1X = w * 0.45;
+                const cp1Y = h * 0.9;
+                const cp2X = w * 0.55;
+                const cp2Y = h * 0.15;
 
+                ctx.beginPath();
                 ctx.moveTo(startX, startY);
-                ctx.bezierCurveTo(canvas.width * 0.4, canvas.height - 20, canvas.width * 0.5, 40, endX, endY);
+                ctx.bezierCurveTo(cp1X, cp1Y, cp2X, cp2Y, endX, endY);
+                ctx.strokeStyle = '#d4af37';
+                ctx.lineWidth = 10;
                 ctx.stroke();
 
-                // Draw Road Center Line
                 ctx.beginPath();
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2;
+                ctx.moveTo(startX, startY);
+                ctx.bezierCurveTo(cp1X, cp1Y, cp2X, cp2Y, endX, endY);
+                ctx.strokeStyle = '#fef08a';
+                ctx.lineWidth = 3;
                 ctx.setLineDash([8, 8]);
-                ctx.moveTo(startX, startY);
-                ctx.bezierCurveTo(canvas.width * 0.4, canvas.height - 20, canvas.width * 0.5, 40, endX, endY);
                 ctx.stroke();
-                ctx.setLineDash([]); // reset
+                ctx.setLineDash([]);
 
-                // Draw Farmer's Field Marker (Destination)
-                ctx.fillStyle = '#e76f51';
+                // 3. Draw Destination Farmer Pin
+                ctx.fillStyle = '#dc2626';
                 ctx.beginPath();
                 ctx.arc(endX, endY, 12, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 10px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('📍 FIELD', endX, endY - 18);
+                ctx.fillText('YOU', endX - 10, endY + 3);
 
-                // Calculate Tractor Position along Bezier curve
-                progress += 0.002;
-                if (progress > 1) progress = 1;
+                // 4. Calculate Moving Operator Position Along Bezier Curve
+                tractorProgress += 0.0015;
+                if (tractorProgress > 0.95) tractorProgress = 0.1; // loop animation
 
-                const t = progress;
-                const cx1 = canvas.width * 0.4;
-                const cy1 = canvas.height - 20;
-                const cx2 = canvas.width * 0.5;
-                const cy2 = 40;
+                const t = tractorProgress;
+                const curX = Math.pow(1-t, 3)*startX + 3*Math.pow(1-t,2)*t*cp1X + 3*(1-t)*Math.pow(t,2)*cp2X + Math.pow(t,3)*endX;
+                const curY = Math.pow(1-t, 3)*startY + 3*Math.pow(1-t,2)*t*cp1Y + 3*(1-t)*Math.pow(t,2)*cp2Y + Math.pow(t,3)*endY;
 
-                // Cubic Bezier Point Calculation
-                const currX = Math.pow(1-t, 3)*startX + 3*Math.pow(1-t, 2)*t*cx1 + 3*(1-t)*Math.pow(t, 2)*cx2 + Math.pow(t, 3)*endX;
-                const currY = Math.pow(1-t, 3)*startY + 3*Math.pow(1-t, 2)*t*cy1 + 3*(1-t)*Math.pow(t, 2)*cy2 + Math.pow(t, 3)*endY;
-
-                // Draw Moving Machine Pulse Halo
-                ctx.beginPath();
-                ctx.arc(currX, currY, 20, 0, Math.PI * 2);
+                // Pulsing Halo behind moving tractor
                 ctx.fillStyle = 'rgba(82, 183, 136, 0.4)';
+                ctx.beginPath();
+                ctx.arc(curX, curY, 20 + Math.sin(Date.now()/200)*4, 0, Math.PI*2);
                 ctx.fill();
 
-                // Draw Machine Icon Pin
-                ctx.beginPath();
-                ctx.arc(currX, currY, 12, 0, Math.PI * 2);
+                // Draw Operator Tractor Marker
                 ctx.fillStyle = '#52b788';
+                ctx.beginPath();
+                ctx.arc(curX, curY, 14, 0, Math.PI*2);
                 ctx.fill();
                 ctx.strokeStyle = '#ffffff';
                 ctx.lineWidth = 2;
                 ctx.stroke();
 
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 12px FontAwesome';
-                ctx.fillText('🚜', currX - 7, currY + 4);
+                ctx.fillStyle = '#0b251a';
+                ctx.font = '14px FontAwesome';
+                ctx.fillText('🚜', curX - 7, curY + 5);
 
-                // Update Countdown text dynamically
-                const remKm = ((1 - progress) * 2.4).toFixed(1);
-                const remMins = Math.max(1, Math.ceil((1 - progress) * 18));
-                document.getElementById('etaCountdownText').innerText = `${remMins} Minutes (${remKm} km away)`;
+                // Update ETA Countdown Text
+                const minsLeft = Math.max(1, Math.round(18 * (1 - tractorProgress)));
+                document.getElementById('trackingETA').innerText = `${minsLeft} Minutes`;
 
-                if (progress < 1) {
-                    state.animationFrameId = requestAnimationFrame(renderMap);
-                } else {
-                    document.getElementById('etaCountdownText').innerText = "Arrived at Field!";
-                    // Update Stepper
-                    document.getElementById('txtStep3').innerText = "Arrived!";
-                }
+                trackingAnimId = requestAnimationFrame(animateMap);
             }
 
-            renderMap();
+            animateMap();
         }
 
-        function quickEmergencyHarvestBooking() {
-            playAudioTone('click');
-            switchCategoryTab('machineries');
-            selectItemFromCatalog('m1', 'machinery'); // Harvester
+        function finishJobSimulation() {
+            closeTrackingModal();
+            if (state.bookingsHistory.length > 0) {
+                state.bookingsHistory[0].status = 'Completed';
+                renderPastBookings();
+            }
+            openNewReviewModal();
         }
 
-        function callOperatorDirect() {
-            playAudioTone('click');
-            const phone = state.activeTrackingBooking ? state.activeTrackingBooking.provider.phone : '9848012345';
-            showCustomAlert('Contacting Operator', `Dialing direct farmer hotline: +91 ${phone}`, () => {
-                window.location.href = `tel:${phone}`;
-            });
+        function toggleSettingsDrawer() {
+            const drawer = document.getElementById('settingsDrawer');
+            drawer.classList.toggle('hidden');
         }
 
-        function cancelActiveBooking() {
-            playAudioTone('click');
-            showCustomAlert('Booking Cancelled', 'The operator has been notified. No cancellation fees apply.', () => {
-                closeTrackingModal();
-                state.bookings.shift();
-                document.getElementById('bookingBadgeCount').innerText = state.bookings.length;
-            });
+        function switchSettingsTab(tab) {
+            document.getElementById('tabContentProfile').classList.add('hidden');
+            document.getElementById('tabContentBookings').classList.add('hidden');
+            document.getElementById('tabContentReviews').classList.add('hidden');
+
+            document.getElementById('tabBtnProfile').classList.remove('border-kisan-medium', 'text-kisan-medium');
+            document.getElementById('tabBtnBookings').classList.remove('border-kisan-medium', 'text-kisan-medium');
+            document.getElementById('tabBtnReviews').classList.remove('border-kisan-medium', 'text-kisan-medium');
+
+            if (tab === 'profile') {
+                document.getElementById('tabContentProfile').classList.remove('hidden');
+                document.getElementById('tabBtnProfile').classList.add('border-kisan-medium', 'text-kisan-medium');
+            } else if (tab === 'bookings') {
+                document.getElementById('tabContentBookings').classList.remove('hidden');
+                document.getElementById('tabBtnBookings').classList.add('border-kisan-medium', 'text-kisan-medium');
+            } else if (tab === 'reviews') {
+                document.getElementById('tabContentReviews').classList.remove('hidden');
+                document.getElementById('tabBtnReviews').classList.add('border-kisan-medium', 'text-kisan-medium');
+            }
         }
 
-        function openReviewsModal(providerName, encodedReviews) {
-            playAudioTone('click');
-            const reviews = JSON.parse(decodeURIComponent(encodedReviews));
-            const list = document.getElementById('reviewsList');
+        function renderPastBookings() {
+            const container = document.getElementById('pastBookingsList');
+            container.innerHTML = '';
 
-            document.getElementById('reviewsModalTitle').innerText = `${providerName} - Reviews`;
+            if (state.bookingsHistory.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400">No past bookings found.</p>`;
+                return;
+            }
 
-            list.innerHTML = reviews.map(r => `
-                <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-bold text-xs text-gray-800">${r.name}</span>
-                        <span class="text-amber-500 font-bold text-xs">★ ${r.rating}.0</span>
+            state.bookingsHistory.forEach(bk => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 rounded-2xl p-3 border border-slate-200 text-xs space-y-1.5";
+                const isEnRoute = bk.status === 'En Route';
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-slate-800">${bk.item}</span>
+                        <span class="${isEnRoute ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'} font-bold px-2 py-0.5 rounded text-[10px]">${bk.status}</span>
                     </div>
-                    <p class="text-xs text-gray-600">${r.text}</p>
-                </div>
-            `).join('');
-
-            document.getElementById('reviewsModal').classList.remove('hidden');
-        }
-
-        function closeReviewsModal() {
-            playAudioTone('click');
-            document.getElementById('reviewsModal').classList.add('hidden');
-        }
-
-        function openActiveBookingsModal() {
-            playAudioTone('click');
-            const list = document.getElementById('activeBookingsList');
-
-            if (state.bookings.length === 0) {
-                list.innerHTML = `
-                    <div class="text-center py-8 text-gray-400">
-                        <i class="fa-solid fa-box-open text-4xl mb-2"></i>
-                        <p class="text-xs font-semibold">No active bookings found.</p>
+                    <p class="text-slate-500">Operator: <span class="font-bold text-slate-700">${bk.operator}</span> (${bk.phone})</p>
+                    <div class="flex items-center justify-between pt-1 border-t text-[11px]">
+                        <span class="text-slate-400">${bk.date}</span>
+                        <span class="font-extrabold text-kisan-dark">₹${bk.cost}</span>
                     </div>
+                    ${isEnRoute ? `
+                        <button onclick="openLiveTrackingModal(state.bookingsHistory[0]); toggleSettingsDrawer();" class="w-full mt-2 py-1.5 bg-emerald-600 text-white font-bold rounded-lg text-[10px] shadow">
+                            Track Live Rapido Map
+                        </button>
+                    ` : ''}
                 `;
-            } else {
-                list.innerHTML = state.bookings.map(b => `
-                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-2">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-[10px] uppercase font-extrabold text-leafGreen tracking-wider block">ID: ${b.id}</span>
-                                <h5 class="font-extrabold text-sm text-emeraldDeep">${getLocalizedName(b.item)}</h5>
-                            </div>
-                            <span class="bg-mintLight text-leafGreen font-bold text-[10px] px-2.5 py-1 rounded-full">
-                                ${b.status}
-                            </span>
-                        </div>
-                        <div class="text-xs text-gray-600 space-y-0.5">
-                            <p><strong>Provider:</strong> ${b.provider.name} (${b.provider.phone})</p>
-                            <p><strong>Date & Time:</strong> ${b.date} at ${b.time}</p>
-                            <p><strong>Landmark:</strong> ${b.landmark}</p>
-                        </div>
-                        <div class="pt-2 flex justify-end space-x-2">
-                            <button onclick="closeActiveBookingsModal(); openLiveTrackingModal(state.bookings[0])" class="px-3 py-1.5 bg-leafGreen text-white font-bold rounded-lg text-xs">
-                                Track Live <i class="fa-solid fa-location-crosshairs ml-1"></i>
-                            </button>
-                        </div>
+                container.appendChild(card);
+            });
+        }
+
+        function renderUserReviews() {
+            const container = document.getElementById('userReviewsList');
+            container.innerHTML = '';
+
+            if (state.userReviews.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400">No reviews uploaded yet.</p>`;
+                return;
+            }
+
+            state.userReviews.forEach((rev, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 rounded-2xl p-3 border border-slate-200 text-xs space-y-1 relative";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-800">${rev.operator}</span>
+                        <button onclick="deleteReview(${idx})" class="text-red-500 hover:text-red-700 text-xs"><i class="fa-solid fa-trash"></i></button>
                     </div>
-                `).join('');
-            }
-
-            document.getElementById('activeBookingsModal').classList.remove('hidden');
+                    <div class="text-amber-500 font-bold">
+                        ${'⭐'.repeat(rev.rating)}
+                    </div>
+                    <p class="text-slate-600 text-[11px]">${rev.comment}</p>
+                `;
+                container.appendChild(card);
+            });
         }
 
-        function closeActiveBookingsModal() {
-            playAudioTone('click');
-            document.getElementById('activeBookingsModal').classList.add('hidden');
+        function openNewReviewModal() {
+            document.getElementById('addReviewModal').classList.remove('hidden');
         }
 
-        function goHome() {
-            playAudioTone('click');
-            if (state.user.mobile) {
-                switchCategoryTab('machineries');
-            }
+        function closeAddReviewModal() {
+            document.getElementById('addReviewModal').classList.add('hidden');
         }
 
-        /* Initialize Splash Canvas on Page Load */
-        window.onload = function() {
-            initSplashCanvas();
-        };
+        function handleSaveReview(e) {
+            e.preventDefault();
+            const opName = document.getElementById('revOperatorInput').value;
+            const rating = parseInt(document.getElementById('revRatingInput').value);
+            const comment = document.getElementById('revCommentInput').value;
+
+            state.userReviews.unshift({
+                id: 'REV-' + Date.now(),
+                operator: opName,
+                rating: rating,
+                comment: comment
+            });
+
+            renderUserReviews();
+            closeAddReviewModal();
+            switchSettingsTab('reviews');
+        }
+
+        function deleteReview(index) {
+            state.userReviews.splice(index, 1);
+            renderUserReviews();
+        }
+
+        function triggerSimulatedCall(name = 'Ramesh Reddy', phone = '+91 98480 12345') {
+            document.getElementById('callOperatorName').innerText = name;
+            document.getElementById('callOperatorPhone').innerText = phone;
+            document.getElementById('callModal').classList.remove('hidden');
+        }
+
+        function closeCallModal() {
+            document.getElementById('callModal').classList.add('hidden');
+        }
+
+        function performLogout() {
+            state.user.isLoggedIn = false;
+            state.user.mobile = '';
+            state.user.district = '';
+            state.user.mandal = '';
+
+            toggleSettingsDrawer();
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+
+            // Reset login form
+            document.getElementById('loginForm').reset();
+            document.getElementById('mandalSelect').disabled = true;
+        }
     </script>
 </body>
 </html>
