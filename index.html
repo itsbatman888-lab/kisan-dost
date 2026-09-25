@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Supabase Magic Helper Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +12,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+  // LINE 1 & 2: Your Secret Keys (Replace with your real keys from Supabase)
+  const SUPABASE_URL = "https://YOUR_PROJECT_REF.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR_LONG_ANON_KEY_HERE";
+
+  // LINE 3: Wake up Supabase
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // LINE 4+: The function to save farmer details
+  async function saveFarmerToDatabase(mobile, district, mandal) {
+    const { data, error } = await supabase
+      .from('profiles')
+      .upsert([{ 
+        mobile_number: mobile, 
+        district: district, 
+        mandal: mandal 
+      }], { onConflict: 'mobile_number' });
+
+    if (error) {
+      console.error("Error saving farmer:", error.message);
+    } else {
+      console.log("Farmer saved safely in the cloud database!");
+    }
+  }
+
+  // ... All your other existing JavaScript functions continue here ...
+</script>
     <script>
         tailwind.config = {
             theme: {
@@ -1541,6 +1570,4 @@
         }
     </script>
 </body>
-    <!-- Supabase Magic Helper Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </html>
