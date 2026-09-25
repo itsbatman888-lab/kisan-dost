@@ -1,19 +1,18 @@
-const CACHE_NAME = 'kisan-dost-v2';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'kisan-dost-v3';
+
+// ONLY cache local files in cache.addAll() to prevent CORS crashes!
+const LOCAL_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './logo.png', // <--- ADD THIS LINE HERE!
-  'https://cdn.tailwindcss.com',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
+  './logo.png'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Pre-caching offline assets...');
-      return cache.addAll(ASSETS_TO_CACHE);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      console.log('[ServiceWorker] Caching local app shell...');
+      await cache.addAll(LOCAL_ASSETS);
     }).then(() => self.skipWaiting())
   );
 });
@@ -34,33 +33,30 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Ignore non-GET requests or Supabase API requests for real-time freshness
+  // Don't intercept Supabase database requests
   if (event.request.method !== 'GET' || event.request.url.includes('supabase.co')) {
     return;
   }
 
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Clone and store fresh copy in cache
-        if (response && response.status === 200) {
-          const responseClone = response.clone();
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).then((response) => {
+        // Automatically cache valid GET responses dynamically
+        if (response && response.status === 200 && response.type === 'basic') {
+          const responseToCache = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
+            cache.put(event.request, responseToCache);
           });
         }
         return response;
-      })
-      .catch(() => {
-        // Fallback to cache when network is offline
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          if (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) {
-            return caches.match('./index.html');
-          }
-        });
-      })
+      });
+    }).catch(() => {
+      if (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) {
+        return caches.match('./index.html');
+      }
+    })
   );
 });
