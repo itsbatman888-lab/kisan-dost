@@ -5,7 +5,7 @@ const FILES_TO_SAVE = [
   './index.html',
   './manifest.json',
   'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
-  'logo.png'
+  'Kisan dost.png'
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
 ];
 
