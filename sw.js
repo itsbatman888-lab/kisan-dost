@@ -1,11 +1,11 @@
-const CACHE_NAME = 'kisan-dost-v1';
+const CACHE_NAME = 'kisan-dost-v2';
 
 // List of files to save on the phone for offline use
 const FILES_TO_SAVE = [
   './index.html',
   './manifest.json',
+  'Kisan dosti.png'
   'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
-  'Kisan dost.png'
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
 ];
 
